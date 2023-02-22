@@ -22,8 +22,8 @@ provider "aws" {
   }
 }
 
-module "s3" {
-  source = "./modules/s3"
+module "cognito" {
+  source = "./modules/cognito"
 
   project = var.project
 }
