@@ -27,3 +27,9 @@ module "cognito" {
 
   project = var.project
 }
+
+module "cloudfront" {
+  source = "./modules/cloudfront"
+
+  project = var.project
+}

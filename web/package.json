@@ -19,6 +19,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "s3-deploy": "aws s3 sync build/ s3://language-learning-web-deployment",
+    "cloudfront-invalidation": "aws cloudfront create-invalidation --distribution-id ESV3AX1EQB2T8 --paths /*",
+    "deploy": "npm run build && npm run s3-deploy && npm run cloudfront-invalidation",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
