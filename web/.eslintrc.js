@@ -5,7 +5,8 @@ module.exports = {
   },
   extends: [
     'plugin:react/recommended',
-    'standard-with-typescript'
+    'plugin:prettier/recommended',
+    'standard-with-typescript',
   ],
   overrides: [
   ],
@@ -15,11 +16,13 @@ module.exports = {
     project: './tsconfig.json',
   },
   plugins: [
-    'react'
+    'react',
+    'prettier'
   ],
   rules: {
     '@typescript-eslint/semi': [2, "always"],
     "@typescript-eslint/space-before-function-paren": [0],
-    "@typescript-eslint/triple-slash-reference": [0]
+    "@typescript-eslint/triple-slash-reference": [0],
+    'prettier/prettier': 'warn'
   }
 }
