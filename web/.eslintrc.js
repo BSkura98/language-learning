@@ -15,14 +15,12 @@ module.exports = {
     sourceType: 'module',
     project: './tsconfig.json',
   },
-  plugins: [
-    'react',
-    'prettier'
-  ],
+  plugins: ['react', 'prettier'],
   rules: {
-    '@typescript-eslint/semi': [2, "always"],
-    "@typescript-eslint/space-before-function-paren": [0],
-    "@typescript-eslint/triple-slash-reference": [0],
-    'prettier/prettier': 'warn'
-  }
-}
+    '@typescript-eslint/semi': [2, 'always'],
+    '@typescript-eslint/space-before-function-paren': [0],
+    '@typescript-eslint/triple-slash-reference': [0],
+    'prettier/prettier': 'warn',
+    '@typescript-eslint/comma-dangle': [0],
+  },
+};
