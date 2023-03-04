@@ -1,3 +1,10 @@
 {
-  "editFile": "Edit src/App.tsx and save to reload."
+  "pages": {
+    "logIn": {
+      "logIn": "Log in"
+    },
+    "notFound": {
+      "pageNotFound": "Page not found"
+    }
+  }
 }
