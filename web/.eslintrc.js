@@ -1,15 +1,10 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true
+    es2021: true,
   },
-  extends: [
-    'plugin:react/recommended',
-    'plugin:prettier/recommended',
-    'standard-with-typescript',
-  ],
-  overrides: [
-  ],
+  extends: ['plugin:react/recommended', 'plugin:prettier/recommended', 'standard-with-typescript'],
+  overrides: [],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
@@ -22,5 +17,8 @@ module.exports = {
     '@typescript-eslint/triple-slash-reference': [0],
     'prettier/prettier': 'warn',
     '@typescript-eslint/comma-dangle': [0],
+    'comma-dangle': [0],
+    'react/display-name': [0],
+    semi: [0],
   },
 };
