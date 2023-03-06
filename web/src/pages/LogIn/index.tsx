@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, TextField, Typography } from '@mui/material';
