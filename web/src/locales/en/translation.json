@@ -1,0 +1,21 @@
+{
+  "defaultPageTitle": "Language learning app",
+  "pageDescription": "Language learning app",
+  "components": {
+    "passwordTextField": {
+      "password": "Password"
+    }
+  },
+  "pages": {
+    "logIn": {
+      "pageTitle": "Log in",
+      "pageDescription": "Log in to language learning app",
+      "title": "Log in",
+      "emailPlaceholder": "Email",
+      "logInButton": "Log in"
+    },
+    "notFound": {
+      "pageNotFound": "Page not found"
+    }
+  }
+}
