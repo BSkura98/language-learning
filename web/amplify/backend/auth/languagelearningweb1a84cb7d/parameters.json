@@ -1,0 +1,20 @@
+{
+  "authSelections": "userPoolOnly",
+  "resourceName": "languagelearningweb1a84cb7d",
+  "serviceType": "imported",
+  "region": "us-east-1",
+  "usernameAttributes": [
+    "email"
+  ],
+  "requiredAttributes": [],
+  "passwordPolicyMinLength": 8,
+  "passwordPolicyCharacters": [
+    "Requires Lowercase",
+    "Requires Uppercase",
+    "Requires Numbers"
+  ],
+  "mfaConfiguration": "OPTIONAL",
+  "mfaTypes": [
+    "SMS Text Message"
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "auth": {
+    "languagelearningweb1a84cb7d": {
+      "customAuth": false,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito",
+      "serviceType": "imported"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_auth_languagelearningweb1a84cb7d_nativeClientId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "languagelearningweb1a84cb7d"
+        }
+      ]
+    },
+    "AMPLIFY_auth_languagelearningweb1a84cb7d_userPoolId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "languagelearningweb1a84cb7d"
+        }
+      ]
+    },
+    "AMPLIFY_auth_languagelearningweb1a84cb7d_userPoolName": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "languagelearningweb1a84cb7d"
+        }
+      ]
+    },
+    "AMPLIFY_auth_languagelearningweb1a84cb7d_webClientId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "languagelearningweb1a84cb7d"
+        }
+      ]
+    }
+  }
+}

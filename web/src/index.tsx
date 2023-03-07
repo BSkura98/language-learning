@@ -1,18 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { HelmetProvider } from 'react-helmet-async';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { Amplify } from 'aws-amplify';
 
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './i18next';
+import awsExports from './aws-exports';
+
+Amplify.configure(awsExports);
+
+const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <HelmetProvider>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </QueryClientProvider>
   </HelmetProvider>,
 );
 

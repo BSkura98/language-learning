@@ -65,3 +65,19 @@ resource "aws_iam_role" "verification_sms_role" {
     })
   }
 }
+
+resource "aws_cognito_user_pool_client" "web_client" {
+  name = "${var.project}-client"
+
+  user_pool_id = aws_cognito_user_pool.language_learning_user_pool.id
+
+  token_validity_units {
+    access_token  = "hours"
+    id_token      = "hours"
+    refresh_token = "days"
+  }
+
+  access_token_validity  = 6
+  id_token_validity      = 6
+  refresh_token_validity = 1
+}
