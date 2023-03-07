@@ -1,0 +1,25 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-languagelearningweb-dev-151318-authRole",
+      "UnauthRoleArn": "arn:aws:iam::051122813670:role/amplify-languagelearningweb-dev-151318-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::051122813670:role/amplify-languagelearningweb-dev-151318-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-languagelearningweb-dev-151318-deployment",
+      "UnauthRoleName": "amplify-languagelearningweb-dev-151318-unauthRole",
+      "StackName": "amplify-languagelearningweb-dev-151318",
+      "StackId": "arn:aws:cloudformation:us-east-1:051122813670:stack/amplify-languagelearningweb-dev-151318/36a42cf0-bcf2-11ed-90f0-0a533431ff97",
+      "AmplifyAppId": "d3ejdn6ia9f901"
+    },
+    "categories": {
+      "auth": {
+        "languagelearningweb1a84cb7d": {
+          "userPoolId": "us-east-1_quyKAZIpv",
+          "userPoolName": "language-learning-user-pool",
+          "webClientId": "45h29ih61bh89n9em93naecvlh",
+          "nativeClientId": "45h29ih61bh89n9em93naecvlh"
+        }
+      }
+    }
+  }
+}
