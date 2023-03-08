@@ -4,7 +4,6 @@ import { Helmet } from 'react-helmet-async';
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
 
-import './App.css';
 import { LogIn } from './pages/LogIn';
 import { Translator } from './pages/Translator';
 import { NotFound } from './pages/NotFound';
