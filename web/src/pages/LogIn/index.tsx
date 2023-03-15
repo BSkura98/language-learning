@@ -1,23 +1,39 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Alert, TextField, Typography } from '@mui/material';
 import { Helmet } from 'react-helmet-async';
-import { useMutation } from 'react-query';
-import { Auth } from 'aws-amplify';
-import { type CognitoUser } from 'amazon-cognito-identity-js';
 import { LoadingButton } from '@mui/lab';
+import { useNavigate } from 'react-router-dom';
 
 import { LoginForm, Wrapper } from './styled';
 import { PasswordTextField } from '../../components/PasswordTextField';
+import { AccountContext } from '../../utils/cognito/Account';
 
 export const LogIn = memo((): JSX.Element => {
   const { t } = useTranslation('translation', { keyPrefix: 'pages.logIn' });
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  const mutation = useMutation<CognitoUser | any, Error>(async () => {
-    return await Auth.signIn(email, password);
-  });
+  const { authenticate } = useContext(AccountContext);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+
+    setLoading(true);
+    setError('');
+    authenticate(email, password)
+      .then(() => {
+        setLoading(false);
+        navigate('/translator');
+      })
+      .catch((err: Error) => {
+        setError(err.message);
+        setLoading(false);
+      });
+  };
 
   return (
     <>
@@ -26,16 +42,10 @@ export const LogIn = memo((): JSX.Element => {
         <meta name="description" content={`${t('pageDescription')}`} />
       </Helmet>
       <Wrapper>
-        <LoginForm
-          onSubmit={e => {
-            e.preventDefault();
-            mutation.mutate();
-          }}
-        >
+        <LoginForm onSubmit={handleSubmit}>
           <Typography variant="h5" gutterBottom>
             {t('title')}
           </Typography>
-          {mutation.isSuccess && <p>Success!</p>}
           <TextField
             id="outlined-basic"
             label={t('emailPlaceholder')}
@@ -51,8 +61,8 @@ export const LogIn = memo((): JSX.Element => {
             }}
             value={password}
           />
-          {mutation.isError && <Alert severity="error">{mutation.error.message}</Alert>}
-          <LoadingButton variant="contained" loading={mutation.isLoading} loadingPosition="start" type="submit">
+          {error !== '' && <Alert severity="error">{error}</Alert>}
+          <LoadingButton variant="contained" loading={loading} loadingPosition="start" type="submit">
             {t('logInButton')}
           </LoadingButton>
         </LoginForm>

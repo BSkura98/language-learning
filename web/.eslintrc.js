@@ -20,5 +20,7 @@ module.exports = {
     'comma-dangle': [0],
     'react/display-name': [0],
     semi: [0],
+    '@typescript-eslint/member-delimiter-style': [0],
+    '@typescript-eslint/strict-boolean-expressions': [0],
   },
 };

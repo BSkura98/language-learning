@@ -12,7 +12,8 @@
       "pageDescription": "Log in to language learning app",
       "title": "Log in",
       "emailPlaceholder": "Email",
-      "logInButton": "Log in"
+      "logInButton": "Log in",
+      "newPasswordRequired": "New password is required"
     },
     "notFound": {
       "pageNotFound": "Page not found"
