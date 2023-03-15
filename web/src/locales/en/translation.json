@@ -12,11 +12,15 @@
       "pageDescription": "Log in to language learning app",
       "title": "Log in",
       "emailPlaceholder": "Email",
-      "logInButton": "Log in",
-      "newPasswordRequired": "New password is required"
+      "logInButton": "Log in"
     },
     "notFound": {
       "pageNotFound": "Page not found"
+    }
+  },
+  "utils": {
+    "users": {
+      "newPasswordRequired": "New password is required"
     }
   }
 }

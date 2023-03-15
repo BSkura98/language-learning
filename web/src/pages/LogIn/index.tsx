@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { LoginForm, Wrapper } from './styled';
 import { PasswordTextField } from '../../components/PasswordTextField';
-import { AccountContext } from '../../utils/cognito/Account';
+import { AccountContext } from '../../utils/users/Account';
 
 export const LogIn = memo((): JSX.Element => {
   const { t } = useTranslation('translation', { keyPrefix: 'pages.logIn' });

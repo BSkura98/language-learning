@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Outlet, Navigate } from 'react-router-dom';
 import { type CognitoUserSession } from 'amazon-cognito-identity-js';
 
-import { AccountContext } from '../../utils/cognito/Account';
+import { AccountContext } from '../../utils/users/Account';
 
 interface RoutesProps {
   elementIfAuthorized: React.ReactElement;

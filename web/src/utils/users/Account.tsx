@@ -1,11 +1,14 @@
 import React, { createContext } from 'react';
 import { AuthenticationDetails, CognitoUser, type CognitoUserSession } from 'amazon-cognito-identity-js';
+import { useTranslation } from 'react-i18next';
 
 import Pool from './UserPool';
 
 const AccountContext = createContext<any>(null);
 
-const Account = (props: any): JSX.Element => {
+const AccountProvider = (props: any): JSX.Element => {
+  const { t } = useTranslation('translation', { keyPrefix: 'utils.users' });
+
   const getSession = (): CognitoUserSession | null => {
     const user = Pool.getCurrentUser();
     let session = null;
@@ -31,8 +34,8 @@ const Account = (props: any): JSX.Element => {
         onFailure: err => {
           reject(err);
         },
-        newPasswordRequired: data => {
-          resolve(data);
+        newPasswordRequired: () => {
+          reject(new Error(t('newPasswordRequired').toString()));
         },
       });
     });
@@ -41,4 +44,4 @@ const Account = (props: any): JSX.Element => {
   return <AccountContext.Provider value={{ authenticate, getSession }}>{props.children}</AccountContext.Provider>;
 };
 
-export { Account, AccountContext };
+export { AccountProvider, AccountContext };
