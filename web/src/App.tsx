@@ -4,10 +4,10 @@ import { Helmet } from 'react-helmet-async';
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
 
-import './App.css';
 import { LogIn } from './pages/LogIn';
 import { Translator } from './pages/Translator';
 import { NotFound } from './pages/NotFound';
+import { PrivateRoutes, PublicRoutes } from './components/Routes';
 
 function App(): JSX.Element {
   const { t } = useTranslation();
@@ -23,10 +23,14 @@ function App(): JSX.Element {
       </Helmet>
 
       <Routes>
-        <Route path="/login" element={<LogIn />} />
-        <Route path="/translator" element={<Translator />} />
-        <Route path="/" element={<Navigate to="/login" replace />} />
-        <Route path="*" element={<NotFound />} />
+        <Route element={<PrivateRoutes />}>
+          <Route path="/translator" element={<Translator />} />
+          <Route path="/" element={<Navigate to="/translator" replace />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+        <Route element={<PublicRoutes />}>
+          <Route path="/login" element={<LogIn />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

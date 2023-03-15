@@ -17,5 +17,10 @@
     "notFound": {
       "pageNotFound": "Page not found"
     }
+  },
+  "utils": {
+    "users": {
+      "newPasswordRequired": "New password is required"
+    }
   }
 }
