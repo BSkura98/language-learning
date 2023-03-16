@@ -15,7 +15,12 @@ module.exports = {
     '@typescript-eslint/semi': [2, 'always'],
     '@typescript-eslint/space-before-function-paren': [0],
     '@typescript-eslint/triple-slash-reference': [0],
-    'prettier/prettier': 'warn',
+    'prettier/prettier': [
+      'warn',
+      {
+        endOfLine: 'auto',
+      },
+    ],
     '@typescript-eslint/comma-dangle': [0],
     'comma-dangle': [0],
     'react/display-name': [0],
