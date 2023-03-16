@@ -2,6 +2,13 @@
   "defaultPageTitle": "Language learning app",
   "pageDescription": "Language learning app",
   "components": {
+    "appBar": {
+      "title": "Language learning",
+      "translator": "Translator",
+      "repetitions": "Repetitions",
+      "words": "Words",
+      "logout": "Logout"
+    },
     "passwordTextField": {
       "password": "Password"
     }
