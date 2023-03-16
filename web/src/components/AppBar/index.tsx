@@ -136,7 +136,7 @@ const ResponsiveAppBar = (): JSX.Element => {
               mr: 2,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
-              fontFamily: 'monospace',
+              fontFamily: '"Segoe UI Symbol"',
               fontWeight: 700,
               color: 'inherit',
               textDecoration: 'none',
@@ -146,34 +146,34 @@ const ResponsiveAppBar = (): JSX.Element => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <Button
-              key={'Translator'}
+              key={t('translator')}
               onClick={e => {
                 e.preventDefault();
                 navigate('/translator');
               }}
               sx={{ my: 2, color: 'white', display: 'block' }}
             >
-              Translator
+              {t('translator')}
             </Button>
             <Button
-              key={'Repetitions'}
+              key={t('repetitions')}
               onClick={e => {
                 e.preventDefault();
                 navigate('/repetitions');
               }}
               sx={{ my: 2, color: 'white', display: 'block' }}
             >
-              Repetitions
+              {t('repetitions')}
             </Button>
             <Button
-              key={'Words'}
+              key={t('words')}
               onClick={e => {
                 e.preventDefault();
                 navigate('/words');
               }}
               sx={{ my: 2, color: 'white', display: 'block' }}
             >
-              Words
+              {t('words')}
             </Button>
           </Box>
 
