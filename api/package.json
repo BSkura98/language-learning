@@ -3,5 +3,8 @@
     "esbuild": "^0.14.25",
     "serverless-esbuild": "^1.25.0"
   },
-  "name": "api"
+  "name": "language-learning-api",
+  "dependencies": {
+    "aws-lambda": "^1.0.7"
+  }
 }

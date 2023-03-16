@@ -1,4 +1,4 @@
-service: api
+service: language-learning-api
 frameworkVersion: '3'
 
 provider:
