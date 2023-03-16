@@ -8,6 +8,8 @@ import { LogIn } from './pages/LogIn';
 import { Translator } from './pages/Translator';
 import { NotFound } from './pages/NotFound';
 import { PrivateRoutes, PublicRoutes } from './components/Routes';
+import { Repetitions } from './pages/Repetitions';
+import { Words } from './pages/Words';
 
 function App(): JSX.Element {
   const { t } = useTranslation();
@@ -25,6 +27,8 @@ function App(): JSX.Element {
       <Routes>
         <Route element={<PrivateRoutes />}>
           <Route path="/translator" element={<Translator />} />
+          <Route path="/repetitions" element={<Repetitions />} />
+          <Route path="/words" element={<Words />} />
           <Route path="/" element={<Navigate to="/translator" replace />} />
           <Route path="*" element={<NotFound />} />
         </Route>

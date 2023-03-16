@@ -3,6 +3,7 @@ import { Outlet, Navigate } from 'react-router-dom';
 import { type CognitoUserSession } from 'amazon-cognito-identity-js';
 
 import { AccountContext } from '../../utils/users/Account';
+import AppBar from '../AppBar';
 
 interface RoutesProps {
   elementIfAuthorized: React.ReactElement;
@@ -16,7 +17,15 @@ const Routes = ({ elementIfAuthorized, elementIfNotAuthorized }: RoutesProps): R
 };
 
 const PrivateRoutes = (): React.ReactElement => (
-  <Routes elementIfAuthorized={<Outlet />} elementIfNotAuthorized={<Navigate to="/login" />} />
+  <Routes
+    elementIfAuthorized={
+      <>
+        <AppBar />
+        <Outlet />
+      </>
+    }
+    elementIfNotAuthorized={<Navigate to="/login" />}
+  />
 );
 
 const PublicRoutes = (): React.ReactElement => (

@@ -41,7 +41,16 @@ const AccountProvider = (props: any): JSX.Element => {
     });
   };
 
-  return <AccountContext.Provider value={{ authenticate, getSession }}>{props.children}</AccountContext.Provider>;
+  const logout = (): void => {
+    const user = Pool.getCurrentUser();
+    if (user) {
+      user.signOut();
+    }
+  };
+
+  return (
+    <AccountContext.Provider value={{ authenticate, getSession, logout }}>{props.children}</AccountContext.Provider>
+  );
 };
 
 export { AccountProvider, AccountContext };
