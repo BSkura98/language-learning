@@ -7,7 +7,7 @@ provider:
 
 functions:
   hello:
-    handler: handler.hello
+    handler: src/controller/hello/handler.hello
     events:
       - http:
           path: hello
