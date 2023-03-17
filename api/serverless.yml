@@ -7,11 +7,11 @@ provider:
 
 functions:
   hello:
-    handler: src/controller/hello/handler.hello
+    handler: src/controller/translate/handler.translate
     events:
       - http:
-          path: hello
-          method: get
+          path: translate
+          method: post
 
 plugins:
   - serverless-esbuild
