@@ -19,12 +19,19 @@ provider:
             - "*"
 
 functions:
-  hello:
+  translate:
     handler: src/controller/translate/handler.translate
     events:
       - http:
           path: translate
           method: post
+          authorizer: ${self:custom.authorizer}
+  getSupportedLanguages:
+    handler: src/controller/getSupportedLanguages/handler.getSupportedLanguages
+    events:
+      - http:
+          path: supportedLanguages
+          method: get
           authorizer: ${self:custom.authorizer}
 
 plugins:
