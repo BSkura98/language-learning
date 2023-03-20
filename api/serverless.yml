@@ -1,17 +1,31 @@
 service: language-learning-api
 frameworkVersion: '3'
 
+custom:
+  authorizer:
+    arn: ${file(./config/config.json):userPoolArn}
+
 provider:
   name: aws
   runtime: nodejs14.x
 
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - "translate:TranslateText"
+          Resource:
+            - "*"
+
 functions:
   hello:
-    handler: src/controller/hello/handler.hello
+    handler: src/controller/translate/handler.translate
     events:
       - http:
-          path: hello
-          method: get
+          path: translate
+          method: post
+          authorizer: ${self:custom.authorizer}
 
 plugins:
   - serverless-esbuild
