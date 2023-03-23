@@ -8,8 +8,10 @@
       "outDir": ".build",
       "moduleResolution": "node",
       "lib": ["es2015"],
-      "rootDir": "./"
+      "rootDir": "src",
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true
     },
-    "exclude": ["node_modules"]
+    "exclude": ["node_modules", ".build"]
   }
   
