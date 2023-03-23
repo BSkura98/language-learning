@@ -3,6 +3,7 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import { getErrorResponse } from '../../utils/getErrorResponse';
 import { getSupportedLanguagesService } from '../../service/getSupportedLanguages/service';
 import { GetSupportedLanguagesQueryParameters } from '../../service/getSupportedLanguages/queryParameters';
+import { getResponse } from '../../utils/getResponse';
 
 export const getSupportedLanguages = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   try {
@@ -11,10 +12,7 @@ export const getSupportedLanguages = async (event: APIGatewayProxyEvent): Promis
     };
     const result = await getSupportedLanguagesService(queryParameters);
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify(result)
-    };
+    return getResponse(200, result);
   } catch (error) {
     return getErrorResponse(error);
   }

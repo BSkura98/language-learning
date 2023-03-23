@@ -1,4 +1,5 @@
 import { RequestError } from '../errors/RequestError';
+import { getResponse } from './getResponse';
 
 const getErrorMessage = (error: RequestError) => {
   if (error.message) {
@@ -12,7 +13,7 @@ const getErrorMessage = (error: RequestError) => {
   return `Error ${error.statusCode}`;
 };
 
-export const getErrorResponse = (error: RequestError) => ({
-  statusCode: error.statusCode ?? 500,
-  body: JSON.stringify({ message: getErrorMessage(error) })
-});
+export const getErrorResponse = (error: RequestError) => getResponse(
+  error.statusCode ?? 500,
+  JSON.stringify({ message: getErrorMessage(error) })
+);
