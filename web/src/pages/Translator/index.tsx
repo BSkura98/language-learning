@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet-async';
+import { useQuery } from '@tanstack/react-query';
 import Grid from '@mui/material/Unstable_Grid2';
 import { Button, IconButton, type SelectChangeEvent, TextField, Typography } from '@mui/material';
 import SyncAltIcon from '@mui/icons-material/SyncAlt';
@@ -8,9 +9,14 @@ import TranslateIcon from '@mui/icons-material/Translate';
 
 import { Select } from '../../components/Select';
 import { ButtonContainer, TranslatorPageWrapper } from './styled';
+import Api from '../../api/api';
 
 export const Translator = (): JSX.Element => {
   const { t } = useTranslation('translation', { keyPrefix: 'pages.translator' });
+  const getSupportedLanguagesQuery = useQuery({
+    queryKey: ['getSupportedLanguages'],
+    queryFn: Api.getSupportedLanguages,
+  });
 
   const [languageToBeTranslatedFrom, setLanguageToBeTranslatedFrom] = React.useState('auto');
   const [languageToBeTranslatedTo, setLanguageToBeTranslatedTo] = React.useState('en');
@@ -45,13 +51,17 @@ export const Translator = (): JSX.Element => {
               size="small"
               id="language-to-be-translated-from"
               label={t('language').toString()}
-              menuItemsValues={[
-                { value: 'auto', label: t('detect').toString() },
-                { value: 'en', label: 'English' },
-                { value: 'pl', label: 'Polish' },
-              ]}
+              menuItemsValues={[{ value: 'auto', label: t('detect').toString() }].concat(
+                getSupportedLanguagesQuery.data?.Languages.filter(language => language.LanguageCode !== 'auto').map(
+                  language => ({
+                    value: language.LanguageCode,
+                    label: language.LanguageName,
+                  }),
+                ) ?? [],
+              )}
               value={languageToBeTranslatedFrom}
               onChange={handleChangeLanguageToBeTranslatedFrom}
+              disabled={getSupportedLanguagesQuery.isLoading}
             />
             <TextField id="text-textfield" label={t('text')} multiline rows={5} fullWidth />
           </Grid>
@@ -71,18 +81,23 @@ export const Translator = (): JSX.Element => {
               size="small"
               id="language-to-be-translated-to"
               label={t('language').toString()}
-              menuItemsValues={[
-                { value: 'en', label: 'English' },
-                { value: 'pl', label: 'Polish' },
-              ]}
+              menuItemsValues={
+                getSupportedLanguagesQuery.data?.Languages.filter(language => language.LanguageCode !== 'auto').map(
+                  language => ({
+                    value: language.LanguageCode,
+                    label: language.LanguageName,
+                  }),
+                ) ?? []
+              }
               value={languageToBeTranslatedTo}
               onChange={handleChangeLanguageToBeTranslatedTo}
+              disabled={getSupportedLanguagesQuery.isLoading}
             />
             <TextField id="translation-textfield" label={t('translation')} multiline rows={5} fullWidth disabled />
           </Grid>
         </Grid>
         <ButtonContainer>
-          <Button variant="contained" startIcon={<TranslateIcon />}>
+          <Button variant="contained" startIcon={<TranslateIcon />} disabled={getSupportedLanguagesQuery.isLoading}>
             {t('translate')}
           </Button>
         </ButtonContainer>
