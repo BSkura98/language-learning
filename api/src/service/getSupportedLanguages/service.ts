@@ -1,4 +1,4 @@
-import * as AWS from 'aws-sdk';
+import AWS from 'aws-sdk';
 import { APIGatewayProxyResult } from 'aws-lambda';
 
 import { GetSupportedLanguagesQueryParameters } from './queryParameters';

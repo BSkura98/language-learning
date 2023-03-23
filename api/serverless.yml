@@ -15,6 +15,7 @@ provider:
         - Effect: Allow
           Action:
             - "translate:TranslateText"
+            - "translate:ListLanguages"
           Resource:
             - "*"
 
@@ -26,6 +27,7 @@ functions:
           path: translate
           method: post
           authorizer: ${self:custom.authorizer}
+          cors: true
   getSupportedLanguages:
     handler: src/controller/getSupportedLanguages/handler.getSupportedLanguages
     events:
@@ -33,7 +35,20 @@ functions:
           path: supportedLanguages
           method: get
           authorizer: ${self:custom.authorizer}
+          cors: true
+
+resources:
+  Resources:
+    GatewayResponseDefault4XX:
+      Type: 'AWS::ApiGateway::GatewayResponse'
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        ResponseType: DEFAULT_4XX
+        RestApiId:
+          Ref: 'ApiGatewayRestApi'
 
 plugins:
-  - serverless-esbuild
   - serverless-offline
+  - serverless-plugin-typescript
