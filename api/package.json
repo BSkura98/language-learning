@@ -14,6 +14,7 @@
   "name": "language-learning-api",
   "dependencies": {
     "aws-lambda": "^1.0.7",
-    "aws-sdk": "^2.1337.0"
+    "aws-sdk": "^2.1337.0",
+    "jsonschema": "^1.4.1"
   }
 }
