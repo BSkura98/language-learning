@@ -18,6 +18,11 @@ provider:
             - "translate:ListLanguages"
           Resource:
             - "*"
+        - Effect: Allow
+          Action:
+            - "comprehend:DetectDominantLanguage"
+          Resource:
+            - "*"
 
 functions:
   translate:
