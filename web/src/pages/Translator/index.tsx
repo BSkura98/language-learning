@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet-async';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import Grid from '@mui/material/Unstable_Grid2';
 import { Button, IconButton, type SelectChangeEvent, TextField, Typography } from '@mui/material';
 import SyncAltIcon from '@mui/icons-material/SyncAlt';
@@ -13,25 +13,44 @@ import Api from '../../api/api';
 
 export const Translator = (): JSX.Element => {
   const { t } = useTranslation('translation', { keyPrefix: 'pages.translator' });
+
+  const [sourceLanguage, setSourceLanguage] = useState('auto');
+  const [targetLanguage, setTargetLanguage] = useState('en');
+  const [text, setText] = useState('');
+  const [translatedText, setTranslatedText] = useState('');
+
   const getSupportedLanguagesQuery = useQuery({
     queryKey: ['getSupportedLanguages'],
     queryFn: Api.getSupportedLanguages,
   });
 
-  const [languageToBeTranslatedFrom, setLanguageToBeTranslatedFrom] = React.useState('auto');
-  const [languageToBeTranslatedTo, setLanguageToBeTranslatedTo] = React.useState('en');
+  const translateMutation = useMutation({
+    mutationFn: Api.translate,
+    onSuccess: data => {
+      setTranslatedText(data.TranslatedText);
+      setSourceLanguage(data.SourceLanguageCode);
+    },
+  });
 
   const handleChangeLanguageToBeTranslatedFrom = (event: SelectChangeEvent<unknown>): void => {
-    setLanguageToBeTranslatedFrom(event.target.value as string);
+    setSourceLanguage(event.target.value as string);
   };
 
   const handleChangeLanguageToBeTranslatedTo = (event: SelectChangeEvent<unknown>): void => {
-    setLanguageToBeTranslatedTo(event.target.value as string);
+    setTargetLanguage(event.target.value as string);
   };
 
   const handleSwitchLanguages = (): void => {
-    setLanguageToBeTranslatedFrom(languageToBeTranslatedTo);
-    setLanguageToBeTranslatedTo(languageToBeTranslatedFrom);
+    setSourceLanguage(targetLanguage);
+    setTargetLanguage(sourceLanguage);
+  };
+
+  const handleTranslate = (): void => {
+    translateMutation.mutate({
+      sourceLanguageCode: sourceLanguage,
+      targetLanguageCode: targetLanguage,
+      text,
+    });
   };
 
   return (
@@ -59,17 +78,25 @@ export const Translator = (): JSX.Element => {
                   }),
                 ) ?? [],
               )}
-              value={languageToBeTranslatedFrom}
+              value={sourceLanguage}
               onChange={handleChangeLanguageToBeTranslatedFrom}
               disabled={getSupportedLanguagesQuery.isLoading}
             />
-            <TextField id="text-textfield" label={t('text')} multiline rows={5} fullWidth />
+            <TextField
+              id="text-textfield"
+              label={t('text')}
+              multiline
+              rows={5}
+              fullWidth
+              value={text}
+              onChange={e => setText(e.target.value)}
+            />
           </Grid>
           <Grid id="reserve-languages-button-grid" xs={12} md={1}>
             <IconButton
               aria-label="reverse-languages"
               onClick={handleSwitchLanguages}
-              disabled={languageToBeTranslatedFrom === 'auto'}
+              disabled={sourceLanguage === 'auto'}
               color="primary"
             >
               <SyncAltIcon />
@@ -89,15 +116,29 @@ export const Translator = (): JSX.Element => {
                   }),
                 ) ?? []
               }
-              value={languageToBeTranslatedTo}
+              value={targetLanguage}
               onChange={handleChangeLanguageToBeTranslatedTo}
               disabled={getSupportedLanguagesQuery.isLoading}
             />
-            <TextField id="translation-textfield" label={t('translation')} multiline rows={5} fullWidth disabled />
+            <TextField
+              id="translation-textfield"
+              label={t('translation')}
+              value={translatedText}
+              multiline
+              rows={5}
+              fullWidth
+              disabled
+            />
           </Grid>
         </Grid>
         <ButtonContainer>
-          <Button variant="contained" startIcon={<TranslateIcon />} disabled={getSupportedLanguagesQuery.isLoading}>
+          <Button
+            variant="contained"
+            startIcon={<TranslateIcon />}
+            disabled={getSupportedLanguagesQuery.isLoading || translateMutation.isLoading}
+            onClick={handleTranslate}
+            value={translateMutation.data?.TranslatedText}
+          >
             {t('translate')}
           </Button>
         </ButtonContainer>
