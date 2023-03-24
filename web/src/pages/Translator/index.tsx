@@ -32,11 +32,11 @@ export const Translator = (): JSX.Element => {
     },
   });
 
-  const handleChangeLanguageToBeTranslatedFrom = (event: SelectChangeEvent<unknown>): void => {
+  const handleChangeSourceLanguage = (event: SelectChangeEvent<unknown>): void => {
     setSourceLanguage(event.target.value as string);
   };
 
-  const handleChangeLanguageToBeTranslatedTo = (event: SelectChangeEvent<unknown>): void => {
+  const handleChangeTargetLanguage = (event: SelectChangeEvent<unknown>): void => {
     setTargetLanguage(event.target.value as string);
   };
 
@@ -68,7 +68,7 @@ export const Translator = (): JSX.Element => {
             <Select
               fullWidth
               size="small"
-              id="language-to-be-translated-from"
+              id="source-language"
               label={t('language').toString()}
               menuItemsValues={[{ value: 'auto', label: t('detect').toString() }].concat(
                 getSupportedLanguagesQuery.data?.Languages.filter(language => language.LanguageCode !== 'auto').map(
@@ -79,7 +79,7 @@ export const Translator = (): JSX.Element => {
                 ) ?? [],
               )}
               value={sourceLanguage}
-              onChange={handleChangeLanguageToBeTranslatedFrom}
+              onChange={handleChangeSourceLanguage}
               disabled={getSupportedLanguagesQuery.isLoading}
             />
             <TextField
@@ -92,7 +92,7 @@ export const Translator = (): JSX.Element => {
               onChange={e => setText(e.target.value)}
             />
           </Grid>
-          <Grid id="reserve-languages-button-grid" xs={12} md={1}>
+          <Grid id="reverse-languages-button-grid" xs={12} md={1}>
             <IconButton
               aria-label="reverse-languages"
               onClick={handleSwitchLanguages}
@@ -106,7 +106,7 @@ export const Translator = (): JSX.Element => {
             <Select
               fullWidth
               size="small"
-              id="language-to-be-translated-to"
+              id="target-language"
               label={t('language').toString()}
               menuItemsValues={
                 getSupportedLanguagesQuery.data?.Languages.filter(language => language.LanguageCode !== 'auto').map(
@@ -117,7 +117,7 @@ export const Translator = (): JSX.Element => {
                 ) ?? []
               }
               value={targetLanguage}
-              onChange={handleChangeLanguageToBeTranslatedTo}
+              onChange={handleChangeTargetLanguage}
               disabled={getSupportedLanguagesQuery.isLoading}
             />
             <TextField
