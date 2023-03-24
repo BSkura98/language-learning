@@ -27,5 +27,7 @@ module.exports = {
     semi: [0],
     '@typescript-eslint/member-delimiter-style': [0],
     '@typescript-eslint/strict-boolean-expressions': [0],
+    '@typescript-eslint/no-extraneous-class': [0],
+    '@typescript-eslint/no-confusing-void-expression': [0],
   },
 };

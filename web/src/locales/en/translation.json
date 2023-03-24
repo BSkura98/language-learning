@@ -21,6 +21,16 @@
       "emailPlaceholder": "Email",
       "logInButton": "Log in"
     },
+    "translator": {
+      "pageTitle": "Translator",
+      "pageDescription": "Translate texts",
+      "translator": "Translator",
+      "language": "Language",
+      "detect": "Detect",
+      "text": "Text",
+      "translation": "Translation",
+      "translate": "Translate"
+    },
     "notFound": {
       "pageNotFound": "Page not found"
     }

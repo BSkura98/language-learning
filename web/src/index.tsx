@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { HelmetProvider } from 'react-helmet-async';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Amplify } from 'aws-amplify';
 
 import { AccountProvider } from './utils/users/Account';
@@ -10,10 +11,13 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './i18next';
 import awsExports from './aws-exports';
+import { isLocalhost } from './helpers/isLocalhost';
 
 Amplify.configure(awsExports);
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: { queries: { staleTime: 1000 * 60 * 5 } },
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
@@ -23,6 +27,7 @@ root.render(
         <React.StrictMode>
           <App />
         </React.StrictMode>
+        {isLocalhost() && <ReactQueryDevtools />}
       </QueryClientProvider>
     </AccountProvider>
   </HelmetProvider>,
