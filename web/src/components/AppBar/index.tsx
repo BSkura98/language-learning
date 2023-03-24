@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import AppBar from '@mui/material/AppBar';
@@ -23,7 +23,7 @@ const ResponsiveAppBar = (): JSX.Element => {
   const navigate = useNavigate();
   const { t } = useTranslation('translation', { keyPrefix: 'components.appBar' });
   const { getSession, logout } = useContext(AccountContext);
-  const userEmail = getSession().idToken.payload.email;
+  const userEmail = useMemo(() => getSession()?.idToken.payload.email, []);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>): void => {
     setAnchorElNav(event.currentTarget);
