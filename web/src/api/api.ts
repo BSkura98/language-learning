@@ -17,6 +17,17 @@ export default class Api {
       headers,
     });
 
+    instance.interceptors.response.use(
+      response => response,
+      // eslint-disable-next-line @typescript-eslint/promise-function-async
+      error => {
+        if (error.response && error.response.status === 401) {
+          window.location.reload();
+        }
+        return Promise.reject(error);
+      },
+    );
+
     return instance;
   }
 

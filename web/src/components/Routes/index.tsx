@@ -1,5 +1,6 @@
-import React, { useContext } from 'react';
-import { Outlet, Navigate } from 'react-router-dom';
+/* eslint-disable */
+import React, { useContext, useEffect, useMemo } from 'react';
+import { Outlet, Navigate, useLocation } from 'react-router-dom';
 import { type CognitoUserSession } from 'amazon-cognito-identity-js';
 
 import { AccountContext } from '../../utils/users/Account';
@@ -12,7 +13,9 @@ interface RoutesProps {
 
 const Routes = ({ elementIfAuthorized, elementIfNotAuthorized }: RoutesProps): React.ReactElement => {
   const { getSession } = useContext(AccountContext);
-  const auth: CognitoUserSession | null = getSession();
+  const location = useLocation();
+  const auth: CognitoUserSession | null = useMemo(() => getSession(), [location.pathname]);
+
   return auth !== null ? elementIfAuthorized : elementIfNotAuthorized;
 };
 
@@ -28,8 +31,8 @@ const PrivateRoutes = (): React.ReactElement => (
   />
 );
 
-const PublicRoutes = (): React.ReactElement => (
-  <Routes elementIfAuthorized={<Navigate to="/" />} elementIfNotAuthorized={<Outlet />} />
-);
+const PublicRoutes = (): React.ReactElement => {
+  return <Routes elementIfAuthorized={<Navigate to="/" />} elementIfNotAuthorized={<Outlet />} />;
+};
 
 export { PrivateRoutes, PublicRoutes };
