@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { Outlet, Navigate } from 'react-router-dom';
+import React, { useContext, useMemo } from 'react';
+import { Outlet, Navigate, useLocation } from 'react-router-dom';
 import { type CognitoUserSession } from 'amazon-cognito-identity-js';
 
 import { AccountContext } from '../../utils/users/Account';
@@ -12,7 +12,9 @@ interface RoutesProps {
 
 const Routes = ({ elementIfAuthorized, elementIfNotAuthorized }: RoutesProps): React.ReactElement => {
   const { getSession } = useContext(AccountContext);
-  const auth: CognitoUserSession | null = getSession();
+  const location = useLocation();
+  const auth: CognitoUserSession | null = useMemo(() => getSession(), [location.pathname]);
+
   return auth !== null ? elementIfAuthorized : elementIfNotAuthorized;
 };
 
