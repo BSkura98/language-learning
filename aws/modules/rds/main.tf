@@ -1,4 +1,4 @@
-resource "aws_security_group" "language_learning_db_security_group" {
+resource "aws_security_group" "ll_db_security_group" {
   name_prefix = "${var.project}-"
   
   ingress {
@@ -9,7 +9,7 @@ resource "aws_security_group" "language_learning_db_security_group" {
   }
 }
 
-resource "aws_db_instance" "language_learning_db_instance" {
+resource "aws_db_instance" "ll_db_instance" {
   allocated_storage    = 10
   db_name              = format("%s%s", replace(var.project, "-", ""), "database")
   identifier           = format("%s%s", replace(var.project, "-", ""), "database")
