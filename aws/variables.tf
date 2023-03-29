@@ -15,8 +15,8 @@ variable "db_password" {
   sensitive   = true
 }
 
-variable "db_allowed_ip" {
-  description = "IP allowed to connect to database"
-  type        = string
+variable "db_allowed_ips" {
+  description = "IPs allowed to connect to database"
+  type        = list(string)
   sensitive   = true
 }

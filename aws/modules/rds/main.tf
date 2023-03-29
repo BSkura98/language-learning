@@ -5,7 +5,7 @@ resource "aws_security_group" "ll_db_security_group" {
     from_port = 3306
     to_port = 3306
     protocol = "tcp"
-    cidr_blocks = ["${var.db_allowed_ip}/32"]
+    cidr_blocks = [for ip in var.db_allowed_ips: "${ip}/32"]
   }
 }
 
@@ -20,6 +20,6 @@ resource "aws_db_instance" "ll_db_instance" {
   password             = var.db_password
   parameter_group_name = "default.mysql8.0"
   skip_final_snapshot  = true
-  vpc_security_group_ids = [aws_security_group.language_learning_db_security_group.id]
+  vpc_security_group_ids = [aws_security_group.ll_db_security_group.id]
   publicly_accessible  = true
 }
