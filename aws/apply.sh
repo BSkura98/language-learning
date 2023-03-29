@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 terraform init -reconfigure -backend-config "./configuration/backend.tf"
-terraform apply
+terraform apply -var-file="secret.tfvars"
