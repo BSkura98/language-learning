@@ -5,3 +5,6 @@ terraform.tfstate.backup
 
 # Directories
 /.terraform/
+
+# secret.tfvars contains sensitive data
+secret.tfvars
