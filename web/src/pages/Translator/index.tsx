@@ -3,12 +3,12 @@ import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet-async';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import Grid from '@mui/material/Unstable_Grid2';
-import { Button, IconButton, type SelectChangeEvent, TextField, Typography } from '@mui/material';
+import { Button, type SelectChangeEvent, TextField, Typography } from '@mui/material';
 import SyncAltIcon from '@mui/icons-material/SyncAlt';
 import TranslateIcon from '@mui/icons-material/Translate';
 
 import { Select } from '../../components/Select';
-import { ButtonContainer, TranslatorPageWrapper } from './styled';
+import { ReverseLanguagesButton, TranslateButtonContainer, TranslatorPageWrapper } from './styled';
 import Api from '../../api/api';
 
 export const Translator = (): JSX.Element => {
@@ -93,14 +93,14 @@ export const Translator = (): JSX.Element => {
             />
           </Grid>
           <Grid id="reverse-languages-button-grid" xs={12} md={1}>
-            <IconButton
+            <ReverseLanguagesButton
               aria-label="reverse-languages"
               onClick={handleSwitchLanguages}
               disabled={sourceLanguage === 'auto'}
               color="primary"
             >
               <SyncAltIcon />
-            </IconButton>
+            </ReverseLanguagesButton>
           </Grid>
           <Grid xs={12} md={5.5}>
             <Select
@@ -131,7 +131,7 @@ export const Translator = (): JSX.Element => {
             />
           </Grid>
         </Grid>
-        <ButtonContainer>
+        <TranslateButtonContainer>
           <Button
             variant="contained"
             startIcon={<TranslateIcon />}
@@ -141,7 +141,7 @@ export const Translator = (): JSX.Element => {
           >
             {t('translate')}
           </Button>
-        </ButtonContainer>
+        </TranslateButtonContainer>
       </TranslatorPageWrapper>
     </>
   );
