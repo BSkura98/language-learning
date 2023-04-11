@@ -14,7 +14,7 @@ const AccountProvider = (props: any): JSX.Element => {
     let session = null;
     if (user) {
       user.getSession((err: Error | null, userSession: CognitoUserSession | null) => {
-        if (!err) {
+        if (userSession?.isValid() && !err) {
           session = userSession;
         }
       });
