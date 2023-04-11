@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     aws = {
-      source  = "hashicorp/aws"
+      source = "hashicorp/aws"
     }
   }
 
@@ -17,7 +17,7 @@ provider "aws" {
 
   default_tags {
     tags = {
-      Project     = var.project
+      Project = var.project
     }
   }
 }
@@ -37,8 +37,17 @@ module "cloudfront" {
 module "rds" {
   source = "./modules/rds"
 
-  project = var.project
-  db_username = var.db_username
-  db_password = var.db_password
-  db_allowed_ips = var.db_allowed_ips
+  project                    = var.project
+  db_username                = var.db_username
+  db_password                = var.db_password
+  database_security_group_id = module.vpc.database_security_group_id
+}
+
+module "vpc" {
+  source = "./modules/vpc"
+
+  project         = var.project
+  db_allowed_ips  = var.db_allowed_ips
+  default_vpc_id  = var.default_vpc_id
+  vpc_subnet_1_id = var.vpc_subnet_1_id
 }

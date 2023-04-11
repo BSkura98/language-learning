@@ -4,10 +4,21 @@ frameworkVersion: '3'
 custom:
   authorizer:
     arn: ${file(./config/config.json):userPoolArn}
+  dbConnection: ${file(./config/config.json):databaseConnection}
 
 provider:
   name: aws
   runtime: nodejs14.x
+
+  vpc: ${file(./config/config.json):vpc}
+  timeout: 30
+
+  environment:
+    DB_HOST: ${self:custom.dbConnection.host}
+    DB_PORT: ${self:custom.dbConnection.port}
+    DB_DATABASE: ${self:custom.dbConnection.database}
+    DB_USERNAME: ${self:custom.dbConnection.username}
+    DB_PASSWORD: ${self:custom.dbConnection.password}
 
   iam:
     role:
@@ -38,6 +49,14 @@ functions:
     events:
       - http:
           path: supportedLanguages
+          method: get
+          authorizer: ${self:custom.authorizer}
+          cors: true
+  databaseConnectionTest:
+    handler: src/controller/databaseConnectionTest/handler.databaseConnectionTest
+    events:
+      - http:
+          path: databaseConnectionTest
           method: get
           authorizer: ${self:custom.authorizer}
           cors: true
