@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { IconButton } from '@mui/material';
 
 import { PageWrapper } from '../../components/PageWrapper/styled';
 
@@ -21,7 +22,15 @@ export const TranslatorPageWrapper = styled(PageWrapper)`
   }
 `;
 
-export const ButtonContainer = styled.div`
+export const ReverseLanguagesButton = styled(IconButton)`
+  && {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+`;
+
+export const TranslateButtonContainer = styled.div`
   margin-top: 1rem;
   display: flex;
   justify-content: center;
