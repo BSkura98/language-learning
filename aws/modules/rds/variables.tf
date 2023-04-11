@@ -1,5 +1,5 @@
 variable "project" {
-  type = string
+  type        = string
   description = "Project name"
 }
 
@@ -15,8 +15,7 @@ variable "db_password" {
   sensitive   = true
 }
 
-variable "db_allowed_ips" {
-  description = "IPs allowed to connect to database"
-  type        = list(string)
-  sensitive   = true
+variable "database_security_group_id" {
+  description = "Security group id for database"
+  type        = string
 }
