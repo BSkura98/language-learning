@@ -20,10 +20,10 @@ export class Repetition extends BaseEntity {
   @Column({ nullable: false, type: 'varchar' })
   public targetLanguageText!: string;
 
-  @Column({ nullable: false, type: 'varchar' })
+  @Column({ nullable: false, type: 'numeric' })
   public successfulRepetitionsInRow!: number;
 
-  @Column({ nullable: false, type: 'varchar' })
+  @Column({ nullable: false, type: 'datetime' })
   public nextRepetitionDate!: Date;
 
   @CreateDateColumn()
