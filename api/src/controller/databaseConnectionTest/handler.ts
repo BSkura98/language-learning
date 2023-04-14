@@ -2,6 +2,7 @@ import { DataSource } from 'typeorm';
 
 import { getErrorResponse } from '../../utils/getErrorResponse';
 import { getResponse } from '../../utils/getResponse';
+// import { Repetition } from '../../entities/Repetition';
 
 export const databaseConnectionTest = async () => {
   try {
@@ -12,7 +13,6 @@ export const databaseConnectionTest = async () => {
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
-      synchronize: true,
       logging: true
     });
     await appDataSource.initialize();
