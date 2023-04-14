@@ -2,28 +2,28 @@ import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, CreateDateColumn, U
 
 @Entity('repetitions')
 export class Repetition extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   public id!: string;
 
-  @Column({ nullable: false })
+  @Column({ nullable: false, type: 'varchar' })
   public userId!: string;
 
-  @Column({ nullable: false })
+  @Column({ nullable: false, type: 'varchar' })
   public sourceLanguage!: string;
 
-  @Column({ nullable: false })
+  @Column({ nullable: false, type: 'varchar' })
   public targetLanguage!: string;
 
-  @Column({ nullable: false })
+  @Column({ nullable: false, type: 'varchar' })
   public sourceLanguageText!: string;
 
-  @Column({ nullable: false })
+  @Column({ nullable: false, type: 'varchar' })
   public targetLanguageText!: string;
 
-  @Column({ nullable: false })
+  @Column({ nullable: false, type: 'varchar' })
   public successfulRepetitionsInRow!: number;
 
-  @Column({ nullable: false })
+  @Column({ nullable: false, type: 'varchar' })
   public nextRepetitionDate!: Date;
 
   @CreateDateColumn()
