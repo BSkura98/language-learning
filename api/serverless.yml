@@ -60,6 +60,14 @@ functions:
           method: get
           authorizer: ${self:custom.authorizer}
           cors: true
+  createRepetition:
+    handler: src/controller/createRepetition/handler.createRepetition
+    events:
+      - http:
+          path: repetitions
+          method: post
+          authorizer: ${self:custom.authorizer}
+          cors: true
 
 resources:
   Resources:

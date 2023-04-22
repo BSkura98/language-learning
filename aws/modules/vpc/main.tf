@@ -68,15 +68,15 @@ resource "aws_security_group_rule" "access_from_lambdas_to_translate_vpc_endpoin
   security_group_id = aws_security_group.translate_vpc_endpoint.id
 }
 
-resource "aws_vpc_endpoint" "translate" {
-  vpc_id              = data.aws_vpc.default_vpc.id
-  service_name        = "com.amazonaws.us-east-1.translate"
-  vpc_endpoint_type   = "Interface"
-  private_dns_enabled = true
+# resource "aws_vpc_endpoint" "translate" {
+#   vpc_id              = data.aws_vpc.default_vpc.id
+#   service_name        = "com.amazonaws.us-east-1.translate"
+#   vpc_endpoint_type   = "Interface"
+#   private_dns_enabled = true
 
-  security_group_ids = [
-    aws_security_group.translate_vpc_endpoint.id,
-  ]
+#   security_group_ids = [
+#     aws_security_group.translate_vpc_endpoint.id,
+#   ]
 
-  subnet_ids = [var.vpc_subnet_1_id]
-}
+#   subnet_ids = [var.vpc_subnet_1_id]
+# }
