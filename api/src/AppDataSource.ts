@@ -10,7 +10,7 @@ const dataSourceOptions: DataSourceOptions = {
   password: databaseConnectionConfig.password,
   database: databaseConnectionConfig.database,
   logging: true,
-  entities: [__dirname + '/entities/*.ts'],
+  entities: [__dirname + '/entity/*'],
   migrations: [__dirname + '/migrations/*.ts']
 };
 
