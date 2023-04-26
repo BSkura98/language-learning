@@ -68,6 +68,14 @@ functions:
           method: post
           authorizer: ${self:custom.authorizer}
           cors: true
+  updateRepetition:
+    handler: src/controller/updateRepetition/handler.updateRepetition
+    events:
+      - http:
+          path: repetitions/{id}
+          method: patch
+          authorizer: ${self:custom.authorizer}
+          cors: true
 
 resources:
   Resources:
