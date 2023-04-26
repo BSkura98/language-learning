@@ -35,12 +35,12 @@ export const updateRepetitionService = async (
     repetition.nextRepetitionDate = body.nextRepetitionDate;
   }
   if (body.repetitionResult) {
-    const nextRepetitionDateAndSuccessfulRepetitions = calculateNextRepetitionDateAndSuccessfulRepetitions(
+    const { nextRepetitionDate, successfulRepetitionsInRow } = calculateNextRepetitionDateAndSuccessfulRepetitions(
       repetition.successfulRepetitionsInRow,
       body.repetitionResult
     );
-    repetition.nextRepetitionDate = nextRepetitionDateAndSuccessfulRepetitions.nextRepetitionDate;
-    repetition.successfulRepetitionsInRow = nextRepetitionDateAndSuccessfulRepetitions.successfulRepetitionsInRow;
+    repetition.nextRepetitionDate = nextRepetitionDate;
+    repetition.successfulRepetitionsInRow = successfulRepetitionsInRow;
   }
 
   return await repetitionRepository.save(repetition);

@@ -7,7 +7,11 @@ export const validate = (body: UpdateRepetitionRequest) => {
   const validator = new Validator();
 
   const validation = validator.validate(
-    { sourceLanguageText: body.sourceLanguageText, targetLanguageText: body.targetLanguageText },
+    {
+      sourceLanguageText: body.sourceLanguageText,
+      targetLanguageText: body.targetLanguageText,
+      nextRepetitionDate: body.nextRepetitionDate
+    },
     validationSchema
   );
 
@@ -20,13 +24,13 @@ const validationSchema: Schema = {
   type: 'object',
   properties: {
     sourceLanguageText: {
-      type: 'string'
+      type: ['string', 'null']
     },
     targetLanguageText: {
-      type: 'string'
+      type: ['string', 'null']
     },
     nextRepetitionDate: {
-      type: 'string',
+      type: ['string', 'null'],
       format: 'date-time'
     }
   }
