@@ -25,15 +25,15 @@ provider:
       statements:
         - Effect: Allow
           Action:
-            - "translate:TranslateText"
-            - "translate:ListLanguages"
+            - 'translate:TranslateText'
+            - 'translate:ListLanguages'
           Resource:
-            - "*"
+            - '*'
         - Effect: Allow
           Action:
-            - "comprehend:DetectDominantLanguage"
+            - 'comprehend:DetectDominantLanguage'
           Resource:
-            - "*"
+            - '*'
 
 functions:
   translate:
@@ -66,6 +66,14 @@ functions:
       - http:
           path: repetitions
           method: post
+          authorizer: ${self:custom.authorizer}
+          cors: true
+  updateRepetition:
+    handler: src/controller/updateRepetition/handler.updateRepetition
+    events:
+      - http:
+          path: repetitions/{id}
+          method: patch
           authorizer: ${self:custom.authorizer}
           cors: true
   deleteRepetition:
