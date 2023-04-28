@@ -8,36 +8,35 @@ import { NotFoundError } from '../../errors/NotFoundError';
 import { ForbiddenError } from '../../errors/ForbiddenError';
 
 export const updateRepetitionService = async (
-  id: string,
-  body: UpdateRepetitionRequest
+  requestParameters: UpdateRepetitionRequest
 ): Promise<APIGatewayProxyResult> => {
-  validate(body);
+  validate(requestParameters);
 
   const repetitionRepository = await getRepetitionRepository();
 
-  const repetition = await repetitionRepository.findOneBy({ id });
+  const repetition = await repetitionRepository.findOneBy({ id: requestParameters.id });
 
   if (!repetition) {
     throw new NotFoundError('Repetition not found');
   }
 
-  if (repetition.userId !== body.userId) {
-    new ForbiddenError('You are not authorized to modify this repetition');
+  if (repetition.userId !== requestParameters.userId) {
+    throw new ForbiddenError('You are not authorized to modify this repetition');
   }
 
-  if (body.sourceLanguageText) {
-    repetition.sourceLanguageText = body.sourceLanguageText;
+  if (requestParameters.sourceLanguageText) {
+    repetition.sourceLanguageText = requestParameters.sourceLanguageText;
   }
-  if (body.targetLanguageText) {
-    repetition.targetLanguageText = body.targetLanguageText;
+  if (requestParameters.targetLanguageText) {
+    repetition.targetLanguageText = requestParameters.targetLanguageText;
   }
-  if (body.nextRepetitionDate) {
-    repetition.nextRepetitionDate = body.nextRepetitionDate;
+  if (requestParameters.nextRepetitionDate) {
+    repetition.nextRepetitionDate = requestParameters.nextRepetitionDate;
   }
-  if (body.repetitionResult) {
+  if (requestParameters.repetitionResult) {
     const { nextRepetitionDate, successfulRepetitionsInRow } = calculateNextRepetitionDateAndSuccessfulRepetitions(
       repetition.successfulRepetitionsInRow,
-      body.repetitionResult
+      requestParameters.repetitionResult
     );
     repetition.nextRepetitionDate = nextRepetitionDate;
     repetition.successfulRepetitionsInRow = successfulRepetitionsInRow;

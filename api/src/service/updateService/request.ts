@@ -7,6 +7,9 @@ export enum RepetitionResult {
 }
 
 export interface UpdateRepetitionRequest extends BaseRequest {
+  // path parameters
+  id: string;
+  // body
   sourceLanguageText?: string;
   targetLanguageText?: string;
   nextRepetitionDate?: Date;
