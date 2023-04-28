@@ -1,6 +1,6 @@
 import { addDays } from 'date-fns';
 
-import { RepetitionResult } from '../service/updateService/request';
+import { RepetitionResult } from '../service/updateRepetition/request';
 
 const calculateNewSuccessfulRepetitionsInRow = (
   previousSuccessfulRepetitionsInRow: number,

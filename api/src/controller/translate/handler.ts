@@ -8,8 +8,8 @@ import { getRequest } from '../../utils/getRequest';
 
 export const translate = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   try {
-    const body: TranslateRequest = getRequest(event);
-    const result = await translateService(body);
+    const requestParameters: TranslateRequest = getRequest(event);
+    const result = await translateService(requestParameters);
 
     return getResponse(200, result);
   } catch (error) {

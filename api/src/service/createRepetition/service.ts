@@ -7,13 +7,13 @@ import { Repetition } from '../../entity/Repetition';
 import { getRepetitionRepository } from '../../repository/repetition.repository';
 import { validate } from './validator';
 
-export const createRepetitionService = async (body: CreateRepetitionRequest): Promise<APIGatewayProxyResult> => {
-  validate(body);
+export const createRepetitionService = async (requestParameters: CreateRepetitionRequest): Promise<APIGatewayProxyResult> => {
+  validate(requestParameters);
 
   const repetitionRepository = await getRepetitionRepository();
 
   const repetition = Repetition.create({
-    ...body,
+    ...requestParameters,
     id: uuid(),
     successfulRepetitionsInRow: 0,
     nextRepetitionDate: addDays(new Date(), 1)
