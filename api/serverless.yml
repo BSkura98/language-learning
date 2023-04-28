@@ -69,7 +69,7 @@ functions:
           authorizer: ${self:custom.authorizer}
           cors: true
   deleteRepetition:
-    handler: src/controller/createRepetition/handler.deleteRepetition
+    handler: src/controller/deleteRepetition/handler.deleteRepetition
     events:
       - http:
           path: repetitions/{id}

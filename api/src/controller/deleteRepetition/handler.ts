@@ -8,8 +8,9 @@ import { DeleteRepetitionRequest } from '../../service/deleteRepetition/request'
 
 export const deleteRepetition = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   try {
-    const body: DeleteRepetitionRequest = { ...getRequest(event), id: event.data.getPathParam('id') };
-    await deleteRepetitionService(body);
+    const requestParameters: DeleteRepetitionRequest = getRequest(event, { pathParameters: ['id'] });
+
+    await deleteRepetitionService(requestParameters);
 
     return getResponse(204);
   } catch (error) {
