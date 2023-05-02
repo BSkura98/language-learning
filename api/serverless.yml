@@ -52,11 +52,19 @@ functions:
           method: get
           authorizer: ${self:custom.authorizer}
           cors: true
-  databaseConnectionTest:
-    handler: src/controller/databaseConnectionTest/handler.databaseConnectionTest
+  getRepetitions:
+    handler: src/controller/getRepetitions/handler.getRepetitions
     events:
       - http:
-          path: databaseConnectionTest
+          path: repetitions
+          method: get
+          authorizer: ${self:custom.authorizer}
+          cors: true
+  getRepetition:
+    handler: src/controller/getRepetition/handler.getRepetition
+    events:
+      - http:
+          path: repetitions/{id}
           method: get
           authorizer: ${self:custom.authorizer}
           cors: true
