@@ -8,7 +8,7 @@ interface GetRequestOptions {
 }
 
 export const getRequest = (event: APIGatewayProxyEvent, options?: GetRequestOptions) => {
-  const pathParameters = options?.pathParameters?.map((param) => ({ [param]: event.data.getPathParam(param) }));
+  const pathParameters = options?.pathParameters?.map((param) => ({ [param]: event.pathParameters[param] }));
   const queryParameters = options?.queryParameters?.map((param) => ({ [param]: event.queryStringParameters[param] }));
   let sort;
   if (queryParameters && queryParameters['sortBy']) {
