@@ -1,6 +1,7 @@
-import { BaseRequest } from "../../utils/BaseRequest";
+import { BaseRequest } from "../../utils/interfaces/BaseRequest";
 
 export interface CreateRepetitionRequest extends BaseRequest {
+  // body
   sourceLanguage: string;
   targetLanguage: string;
   sourceLanguageText: string;

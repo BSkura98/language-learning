@@ -1,4 +1,4 @@
-import { BaseRequest } from '../../utils/BaseRequest';
+import { BaseRequest } from '../../utils/interfaces/BaseRequest';
 
 export enum RepetitionResult {
   success = 'success',
