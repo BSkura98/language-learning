@@ -12,9 +12,9 @@ export const getRepetitions = async (event: APIGatewayProxyEvent): Promise<APIGa
       queryParameters: ['startDate', 'endDate', 'sourceLanguage', 'targetLanguage', 'sortBy', 'sortType']
     });
 
-    await getRepetitionsService(requestParameters);
+    const repetitions = await getRepetitionsService(requestParameters);
 
-    return getResponse(200);
+    return getResponse(200, repetitions);
   } catch (error) {
     return getErrorResponse(error);
   }

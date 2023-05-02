@@ -26,13 +26,6 @@ export const getRequest = (event: APIGatewayProxyEvent, options?: GetRequestOpti
     delete queryParameters['sortBy'];
     delete queryParameters['sortType'];
   }
-  console.log({
-    userId: getUserId(event),
-    sort,
-    ...pathParameters,
-    ...queryParameters,
-    ...JSON.parse(event.body)
-  });
   return {
     userId: getUserId(event),
     sort,

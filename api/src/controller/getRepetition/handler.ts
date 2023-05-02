@@ -12,9 +12,9 @@ export const getRepetition = async (event: APIGatewayProxyEvent): Promise<APIGat
       pathParameters: ['id']
     });
 
-    await getRepetitionService(requestParameters);
+    const repetition = await getRepetitionService(requestParameters);
 
-    return getResponse(200);
+    return getResponse(200, repetition);
   } catch (error) {
     return getErrorResponse(error);
   }
