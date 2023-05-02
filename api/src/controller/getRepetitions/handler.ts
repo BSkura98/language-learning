@@ -9,7 +9,7 @@ import { getRepetitionsService } from '../../service/getRepetitions/service';
 export const getRepetitions = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   try {
     const requestParameters: GetRepetitionsRequest = getRequest(event, {
-      queryParameters: ['startDate', 'endDate', 'sourceLanguage', 'targetLanguage', 'sort']
+      queryParameters: ['startDate', 'endDate', 'sourceLanguage', 'targetLanguage', 'sortBy', 'sortType']
     });
 
     await getRepetitionsService(requestParameters);

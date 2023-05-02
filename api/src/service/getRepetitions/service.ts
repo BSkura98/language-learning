@@ -1,9 +1,9 @@
 import { APIGatewayProxyResult } from 'aws-lambda';
+import { endOfDay } from 'date-fns';
 
 import { getRepetitionRepository } from '../../repository/repetition.repository';
 import { GetRepetitionsRequest } from './request';
 import { getSort } from '../../utils/getSort';
-import { endOfDay } from 'date-fns';
 
 export const getRepetitionsService = async (
   requestParameters: GetRepetitionsRequest
