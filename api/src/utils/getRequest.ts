@@ -21,7 +21,7 @@ export const getRequest = (event: APIGatewayProxyEvent, options?: GetRequestOpti
   }
   return {
     userId: getUserId(event),
-    sort: sort || undefined,
+    ...[sort],
     ...pathParameters,
     ...queryParameters,
     ...JSON.parse(event.body)
