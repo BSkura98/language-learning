@@ -8,8 +8,15 @@ interface GetRequestOptions {
 }
 
 export const getRequest = (event: APIGatewayProxyEvent, options?: GetRequestOptions) => {
-  const pathParameters = options?.pathParameters?.map((param) => ({ [param]: event.pathParameters[param] }));
-  const queryParameters = options?.queryParameters?.map((param) => ({ [param]: event.queryStringParameters[param] }));
+  const pathParameters = options?.pathParameters?.reduce((params, param) => {
+    params[param] = event.pathParameters[param];
+    return params;
+  }, {});
+  const queryParameters = options?.queryParameters?.reduce((params, param) => {
+    params[param] = event.queryParameters[param];
+    return params;
+  }, {});
+
   let sort;
   if (queryParameters && queryParameters['sortBy']) {
     sort = {
@@ -19,9 +26,16 @@ export const getRequest = (event: APIGatewayProxyEvent, options?: GetRequestOpti
     delete queryParameters['sortBy'];
     delete queryParameters['sortType'];
   }
+  console.log({
+    userId: getUserId(event),
+    sort,
+    ...pathParameters,
+    ...queryParameters,
+    ...JSON.parse(event.body)
+  });
   return {
     userId: getUserId(event),
-    ...[sort],
+    sort,
     ...pathParameters,
     ...queryParameters,
     ...JSON.parse(event.body)
