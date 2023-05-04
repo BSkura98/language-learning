@@ -8,14 +8,22 @@ interface GetRequestOptions {
 }
 
 export const getRequest = (event: APIGatewayProxyEvent, options?: GetRequestOptions) => {
-  const pathParameters = options?.pathParameters?.reduce((params, param) => {
-    params[param] = event.pathParameters[param];
-    return params;
-  }, {});
-  const queryParameters = options?.queryParameters?.reduce((params, param) => {
-    params[param] = event.queryParameters[param];
-    return params;
-  }, {});
+  const pathParameters = event.pathParameters;
+  if (pathParameters) {
+    options?.pathParameters?.forEach((parameter) => {
+      if (!(parameter in pathParameters)) {
+        delete pathParameters[parameter];
+      }
+    });
+  }
+  const queryParameters = event.queryStringParameters;
+  if (queryParameters) {
+    options?.queryParameters?.forEach((parameter) => {
+      if (!(parameter in queryParameters)) {
+        delete queryParameters[parameter];
+      }
+    });
+  }
 
   let sort;
   if (queryParameters && queryParameters['sortBy']) {
