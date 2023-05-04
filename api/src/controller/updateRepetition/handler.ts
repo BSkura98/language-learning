@@ -9,9 +9,9 @@ import { UpdateRepetitionRequest } from '../../service/updateRepetition/request'
 export const updateRepetition = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   try {
     const requestParameters: UpdateRepetitionRequest = getRequest(event, { pathParameters: ['id'] });
-    const result = await updateRepetitionService(requestParameters);
+    await updateRepetitionService(requestParameters);
 
-    return getResponse(200, result);
+    return getResponse(200);
   } catch (error) {
     return getErrorResponse(error);
   }
