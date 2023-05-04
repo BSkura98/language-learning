@@ -10,16 +10,23 @@ export const getRepetitionsService = async (
 ): Promise<APIGatewayProxyResult> => {
   const repetitionRepository = await getRepetitionRepository();
   const { sortBy, sortType } = getSort('repetition', requestParameters.sort);
+  const { startDate, endDate, sourceLanguage, targetLanguage } = requestParameters;
 
-  const repetitions = repetitionRepository
+  const repetitions = await repetitionRepository
     .createQueryBuilder('repetition')
     .where('repetition.userId = :userId', { userId: requestParameters.userId })
-    .where('repetition.nextRepetitionDate >= :startDate', { startDate: requestParameters.startDate })
-    .where('repetition.nextRepetitionDate <= :endDate', {
-      endDate: requestParameters.endDate ? endOfDay(requestParameters.endDate) : ''
+    .andWhere(startDate ? 'repetition.nextRepetitionDate >= :startDate' : 'TRUE', {
+      startDate
     })
-    .where('repetition.sourceLanguage = :sourceLanguage', { sourceLanguage: requestParameters.sourceLanguage })
-    .where('repetition.targetLanguage = :targetLanguage', { targetLanguage: requestParameters.targetLanguage })
+    .andWhere(endDate ? 'repetition.nextRepetitionDate <= :endDate' : 'TRUE', {
+      endDate: endDate && endOfDay(new Date(endDate))
+    })
+    .andWhere(sourceLanguage ? 'repetition.sourceLanguage = :sourceLanguage' : 'TRUE', {
+      sourceLanguage
+    })
+    .andWhere(targetLanguage ? 'repetition.targetLanguage = :targetLanguage' : 'TRUE', {
+      targetLanguage
+    })
     .orderBy(sortBy, sortType)
     .getMany();
 
