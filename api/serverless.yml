@@ -25,15 +25,15 @@ provider:
       statements:
         - Effect: Allow
           Action:
-            - "translate:TranslateText"
-            - "translate:ListLanguages"
+            - 'translate:TranslateText'
+            - 'translate:ListLanguages'
           Resource:
-            - "*"
+            - '*'
         - Effect: Allow
           Action:
-            - "comprehend:DetectDominantLanguage"
+            - 'comprehend:DetectDominantLanguage'
           Resource:
-            - "*"
+            - '*'
 
 functions:
   translate:
@@ -52,12 +52,44 @@ functions:
           method: get
           authorizer: ${self:custom.authorizer}
           cors: true
-  databaseConnectionTest:
-    handler: src/controller/databaseConnectionTest/handler.databaseConnectionTest
+  getRepetitions:
+    handler: src/controller/getRepetitions/handler.getRepetitions
     events:
       - http:
-          path: databaseConnectionTest
+          path: repetitions
           method: get
+          authorizer: ${self:custom.authorizer}
+          cors: true
+  getRepetition:
+    handler: src/controller/getRepetition/handler.getRepetition
+    events:
+      - http:
+          path: repetitions/{id}
+          method: get
+          authorizer: ${self:custom.authorizer}
+          cors: true
+  createRepetition:
+    handler: src/controller/createRepetition/handler.createRepetition
+    events:
+      - http:
+          path: repetitions
+          method: post
+          authorizer: ${self:custom.authorizer}
+          cors: true
+  updateRepetition:
+    handler: src/controller/updateRepetition/handler.updateRepetition
+    events:
+      - http:
+          path: repetitions/{id}
+          method: patch
+          authorizer: ${self:custom.authorizer}
+          cors: true
+  deleteRepetition:
+    handler: src/controller/deleteRepetition/handler.deleteRepetition
+    events:
+      - http:
+          path: repetitions/{id}
+          method: delete
           authorizer: ${self:custom.authorizer}
           cors: true
 

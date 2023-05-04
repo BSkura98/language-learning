@@ -5,6 +5,7 @@
       "sourceMap": true,
       "allowJs": true,
       "target": "es6",
+      "module": "commonjs",
       "outDir": ".build",
       "moduleResolution": "node",
       "lib": ["es2015"],
