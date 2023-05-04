@@ -8,12 +8,12 @@ const calculateNewSuccessfulRepetitionsInRow = (
 ): number => {
   switch (repetitionResult) {
     case RepetitionResult.success:
-      return previousSuccessfulRepetitionsInRow + 1;
+      return +previousSuccessfulRepetitionsInRow + 1;
     case RepetitionResult.failure:
       return 0;
     case RepetitionResult.partialSuccess:
     default:
-      return previousSuccessfulRepetitionsInRow;
+      return +previousSuccessfulRepetitionsInRow;
   }
 };
 
@@ -24,7 +24,7 @@ const calculateNextRepetitionDate = (successfulRepetitionsInRow: number) => {
     case 1:
       return addDays(new Date(), 3);
     default:
-      return addDays(new Date(), 7 * (successfulRepetitionsInRow - 1));
+      return addDays(new Date(), 7 * (successfulRepetitionsInRow - 1) * (successfulRepetitionsInRow - 1));
   }
 };
 

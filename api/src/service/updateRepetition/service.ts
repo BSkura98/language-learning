@@ -6,41 +6,44 @@ import { validate } from './validator';
 import { calculateNextRepetitionDateAndSuccessfulRepetitions } from '../../helpers/calculateNextRepetitionDateAndSuccessfulRepetitions';
 import { NotFoundError } from '../../errors/NotFoundError';
 import { ForbiddenError } from '../../errors/ForbiddenError';
+import { Repetition } from '../../entity/Repetition';
 
 export const updateRepetitionService = async (
   requestParameters: UpdateRepetitionRequest
 ): Promise<APIGatewayProxyResult> => {
   validate(requestParameters);
+  const {
+    id,
+    userId,
+    repetitionResult,
+    ...parameters
+  }: UpdateRepetitionRequest & { successfulRepetitionsInRow?: number } = requestParameters;
 
   const repetitionRepository = await getRepetitionRepository();
 
-  const repetition = await repetitionRepository.findOneBy({ id: requestParameters.id });
+  const repetition = await repetitionRepository.findOneBy({ id });
 
   if (!repetition) {
     throw new NotFoundError('Repetition not found');
   }
 
-  if (repetition.userId !== requestParameters.userId) {
+  if (repetition.userId !== userId) {
     throw new ForbiddenError('You are not authorized to modify this repetition');
   }
 
-  if (requestParameters.sourceLanguageText) {
-    repetition.sourceLanguageText = requestParameters.sourceLanguageText;
-  }
-  if (requestParameters.targetLanguageText) {
-    repetition.targetLanguageText = requestParameters.targetLanguageText;
-  }
-  if (requestParameters.nextRepetitionDate) {
-    repetition.nextRepetitionDate = requestParameters.nextRepetitionDate;
-  }
-  if (requestParameters.repetitionResult) {
+  if (repetitionResult) {
     const { nextRepetitionDate, successfulRepetitionsInRow } = calculateNextRepetitionDateAndSuccessfulRepetitions(
       repetition.successfulRepetitionsInRow,
-      requestParameters.repetitionResult
+      repetitionResult
     );
-    repetition.nextRepetitionDate = nextRepetitionDate;
-    repetition.successfulRepetitionsInRow = successfulRepetitionsInRow;
+    parameters.nextRepetitionDate = nextRepetitionDate;
+    parameters.successfulRepetitionsInRow = successfulRepetitionsInRow;
   }
 
-  return await repetitionRepository.save(repetition);
+  return await repetitionRepository
+    .createQueryBuilder('repetition')
+    .update(Repetition)
+    .set(parameters)
+    .where('id = :id', { id })
+    .execute();
 };
