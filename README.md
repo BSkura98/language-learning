@@ -30,8 +30,8 @@ To do in web application:
 * Learn through repetition system
 * Sign up
 
-## Endpoints descriptions
-Endpoints are described in [this file](/api/README.md)
+## Endpoints
+You can find endpoints descriptions [here](/api/README.md)
 
 ## Status
 Project is _in progress_
