@@ -14,4 +14,4 @@ To do:
 * Sign up
 
 ## Screenshots
-<img src="./img/1.png" width="200"> <img src="./img/2.png" width="200"> <img src="./img/3.png" width="200"> <img src="./img/4.png" width="80">
+<img src="./img/1.png" width="400"> <img src="./img/2.png" width="400"> <img src="./img/3.png" width="400"> <img src="./img/4.png" width="160">
