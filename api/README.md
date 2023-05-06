@@ -6,11 +6,13 @@ All described endpoints are protected - they use Amazon Cognito user pool as aut
 
 ### GET /supportedLanguages
 Get languages supported by translator
+
 Optional query parameter:
 * `displayLanguageCode` (string) - the language code for the language to use to display the language names in the response (the default is `en`)
 
 ### POST /translate
 Translate text
+
 Required body parameters:
 * `sourceLanguageCode` (string) - the language code for the language of the text to be translated
 * `targetLangugeCode` (string) - the language code for the language of the text after translation
@@ -18,6 +20,7 @@ Required body parameters:
 
 ### POST /repetitions
 Create a new repetition
+
 Required body parameters:
 * `sourceLanguageText` (string) - source text for the repetition
 * `targetLanguageText` (string) - target text for the repetition
@@ -26,6 +29,7 @@ Required body parameters:
 
 ### GET /repetitions
 List your repetitions
+
 Optional query parameters:
 * `startDate` (date) - list repetitions whose next repetition dates are no earlier than given date
 * `endDate` (date) - list repetitions whose next repetition dates are no later than given date
@@ -39,6 +43,7 @@ Get a repetition with given `id`
 
 ### PATCH /repetitions/{id}
 Modify an existing repetition with given `id` or handle repetition result
+
 Optional body parameters:
 * `sourceLanguageText` (string) - source text for the repetition
 * `targetLanguageText` (string) - target text for the repetition
