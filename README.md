@@ -4,10 +4,10 @@ This is an application which allows users for translating texts and learning wor
 ## Screenshots
 _Web application is in an early stage of development_
 
-<img src="./web/img/1.jpg" width="200">
-<img src="./web/img/2.jpg" width="200">
-<img src="./web/img/3.jpg" width="200">
-<img src="./web/img/4.jpg" width="100">
+<img src="./web/img/1.png" width="200">
+<img src="./web/img/2.png" width="200">
+<img src="./web/img/3.png" width="200">
+<img src="./web/img/4.png" width="80">
 
 ## Technologies
 * AWS (Cognito, CloudFront, S3, Lambda, VPC, Translate, RDS)
