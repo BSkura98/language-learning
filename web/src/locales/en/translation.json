@@ -29,7 +29,10 @@
       "detect": "Detect",
       "text": "Text",
       "translation": "Translation",
-      "translate": "Translate"
+      "translate": "Translate",
+      "addRepetition": "Add repetition",
+      "repetitionSuccessfullyAdded": "Repetition has been successfully created!",
+      "repetitionNotCreated": "Error occurred while creating a repetition"
     },
     "notFound": {
       "pageNotFound": "Page not found"

@@ -4,6 +4,8 @@ import { HelmetProvider } from 'react-helmet-async';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Amplify } from 'aws-amplify';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { AccountProvider } from './utils/users/Account';
 import './index.css';
@@ -25,6 +27,18 @@ root.render(
     <AccountProvider>
       <QueryClientProvider client={queryClient}>
         <React.StrictMode>
+          <ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
           <App />
         </React.StrictMode>
         {isLocalhost() && <ReactQueryDevtools />}
