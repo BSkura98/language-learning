@@ -5,13 +5,13 @@ Existing features:
 * Log in
 * List supported languages
 * Translator
+* Add word/phrases to repetitions
 
 To do:
-* Add word/phrases to repetitions
 * List repetitions
 * Modify/delete repetitions
 * Learn through repetition system
 * Sign up
 
 ## Screenshots
-<img src="./img/1.png" width="400"> <img src="./img/2.png" width="400"> <img src="./img/3.png" width="400"> <img src="./img/4.png" width="160">
+<img src="./img/1.png" width="400"> <img src="./img/5.png" width="400"> <img src="./img/6.png" width="400"> <img src="./img/7.png" width="160">

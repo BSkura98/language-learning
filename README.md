@@ -4,7 +4,7 @@ This is an application which allows users for translating texts and learning wor
 ## Screenshots
 _Web application is in an early stage of development_
 
-<img src="./web/img/1.png" width="400"> <img src="./web/img/2.png" width="400"> <img src="./web/img/3.png" width="400"> <img src="./web/img/4.png" width="160">
+<img src="./web/img/1.png" width="400"> <img src="./web/img/5.png" width="400"> <img src="./web/img/6.png" width="400"> <img src="./web/img/7.png" width="160">
 
 ## Technologies
 * AWS (Cognito, CloudFront, S3, Lambda, VPC, Translate, RDS)
@@ -17,14 +17,14 @@ _Web application is in an early stage of development_
 * MySQL
 
 ## Features
-* Log in
-* List supported languages
+* Logging in
+* Listing supported languages
 * Translator
+* Adding words/phrases to repetitions
 * CRUD operations on repetitions (backend)
 * Calculations for a repetition result (backend)
 
 To do in web application:
-* Add word/phrases to repetitions
 * List repetitions
 * Modify/delete repetitions
 * Learn through repetition system
@@ -36,4 +36,4 @@ You can find endpoints descriptions [here](/api/README.md)
 ## Status
 Project is _in progress_
 
-Most important backend endpoints are finished, but the whole repetition system in web application is still to be done.
+Most important backend endpoints are finished, but the repetition system in web application is still to be done.
