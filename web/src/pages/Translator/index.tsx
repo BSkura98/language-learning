@@ -92,9 +92,7 @@ export const Translator = (): JSX.Element => {
             variant="text"
             startIcon={<AddIcon />}
             disabled={!addingRepetitionEnabled}
-            // disabled={getSupportedLanguagesQuery.isLoading || translateMutation.isLoading}
             onClick={handleAddRepetition}
-            // value={translateMutation.data?.TranslatedText}
           >
             {t('addRepetition')}
           </Button>
