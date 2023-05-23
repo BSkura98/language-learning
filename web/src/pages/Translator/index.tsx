@@ -3,9 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet-async';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import Grid from '@mui/material/Unstable_Grid2';
-import { Button, type SelectChangeEvent, TextField, Typography } from '@mui/material';
+import { Button, type SelectChangeEvent, TextField, Typography, Stack } from '@mui/material';
 import SyncAltIcon from '@mui/icons-material/SyncAlt';
 import TranslateIcon from '@mui/icons-material/Translate';
+import AddIcon from '@mui/icons-material/Add';
+import { toast } from 'react-toastify';
 
 import { Select } from '../../components/Select';
 import { ReverseLanguagesButton, TranslateButtonContainer, TranslatorPageWrapper } from './styled';
@@ -19,6 +21,8 @@ export const Translator = (): JSX.Element => {
   const [text, setText] = useState('');
   const [translatedText, setTranslatedText] = useState('');
 
+  const [addingRepetitionEnabled, setAddingRepetitionEnabled] = useState(false);
+
   const getSupportedLanguagesQuery = useQuery({
     queryKey: ['getSupportedLanguages'],
     queryFn: Api.getSupportedLanguages,
@@ -29,18 +33,28 @@ export const Translator = (): JSX.Element => {
     onSuccess: data => {
       setTranslatedText(data.TranslatedText);
       setSourceLanguage(data.SourceLanguageCode);
+      setAddingRepetitionEnabled(true);
     },
   });
 
+  const addRepetitionMutation = useMutation({
+    mutationFn: Api.createRepetition,
+    onSuccess: () => toast.success(t('repetitionSuccessfullyAdded')),
+    onError: () => toast.success(t('repetitionNotCreated')),
+  });
+
   const handleChangeSourceLanguage = (event: SelectChangeEvent<unknown>): void => {
+    setAddingRepetitionEnabled(false);
     setSourceLanguage(event.target.value as string);
   };
 
   const handleChangeTargetLanguage = (event: SelectChangeEvent<unknown>): void => {
+    setAddingRepetitionEnabled(false);
     setTargetLanguage(event.target.value as string);
   };
 
   const handleSwitchLanguages = (): void => {
+    setAddingRepetitionEnabled(false);
     setSourceLanguage(targetLanguage);
     setTargetLanguage(sourceLanguage);
   };
@@ -53,6 +67,16 @@ export const Translator = (): JSX.Element => {
     });
   };
 
+  const handleAddRepetition = (): void => {
+    setAddingRepetitionEnabled(false);
+    addRepetitionMutation.mutate({
+      sourceLanguage,
+      targetLanguage,
+      sourceLanguageText: text,
+      targetLanguageText: translatedText,
+    });
+  };
+
   return (
     <>
       <Helmet>
@@ -60,9 +84,21 @@ export const Translator = (): JSX.Element => {
         <meta name="description" content={`${t('pageDescription')}`} />
       </Helmet>
       <TranslatorPageWrapper>
-        <Typography variant="h5" gutterBottom>
-          {t('translator')}
-        </Typography>
+        <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={2}>
+          <Typography variant="h5" gutterBottom>
+            {t('translator')}
+          </Typography>
+          <Button
+            variant="text"
+            startIcon={<AddIcon />}
+            disabled={!addingRepetitionEnabled}
+            // disabled={getSupportedLanguagesQuery.isLoading || translateMutation.isLoading}
+            onClick={handleAddRepetition}
+            // value={translateMutation.data?.TranslatedText}
+          >
+            {t('addRepetition')}
+          </Button>
+        </Stack>
         <Grid container spacing={2}>
           <Grid xs={12} md={5.5}>
             <Select

@@ -6,6 +6,7 @@ import { type GetSupportedLanguagesResponse } from './responses/getSupportedLang
 import Pool from '../utils/users/UserPool';
 import { type TranslateRequest } from './requests/translateRequest';
 import { type TranslateResponse } from './responses/translateResponse';
+import { type CreateRepetitionRequest } from './requests/createRepetitionRequest';
 
 export default class Api {
   public static createClient(): AxiosInstance {
@@ -57,6 +58,11 @@ export default class Api {
 
   public static async translate(body: TranslateRequest): Promise<TranslateResponse> {
     const response = await Api.createClient().post('/translate', body);
+    return response?.data;
+  }
+
+  public static async createRepetition(body: CreateRepetitionRequest): Promise<CreateRepetitionRequest> {
+    const response = await Api.createClient().post('/repetitions', body);
     return response?.data;
   }
 }
