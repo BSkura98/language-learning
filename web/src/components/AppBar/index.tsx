@@ -110,7 +110,7 @@ const ResponsiveAppBar = (): JSX.Element => {
                 key={t('repetitions')}
                 onClick={e => {
                   e.preventDefault();
-                  navigate('/repetitions');
+                  navigate('/startRepetitions');
                 }}
               >
                 <Typography textAlign="center">{t('repetitions')}</Typography>
@@ -159,7 +159,7 @@ const ResponsiveAppBar = (): JSX.Element => {
               key={t('repetitions')}
               onClick={e => {
                 e.preventDefault();
-                navigate('/repetitions');
+                navigate('/startRepetitions');
               }}
               sx={{ my: 2, color: 'white', display: 'block' }}
             >
