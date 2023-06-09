@@ -10,7 +10,7 @@ import { RepetitionsPageWrapper } from './styled';
 import Api from '../../api/api';
 
 export const StartRepetitions = (): JSX.Element => {
-  const { t } = useTranslation('translation', { keyPrefix: 'pages.repetitions' });
+  const { t } = useTranslation('translation', { keyPrefix: 'pages.startRepetitions' });
 
   const navigate = useNavigate();
 
@@ -20,12 +20,10 @@ export const StartRepetitions = (): JSX.Element => {
   });
 
   const getOverdueRepetitionsNumber = (): number =>
-    getRepetitionsQuery.data?.reduce((number, repetition) => {
-      if (isPast(endOfDay(parseISO(repetition.nextRepetitionDate)))) {
-        return number + 1;
-      }
-      return number;
-    }, 0) ?? 0;
+    getRepetitionsQuery.data?.reduce(
+      (number, repetition) => (isPast(endOfDay(parseISO(repetition.nextRepetitionDate))) ? number + 1 : number),
+      0,
+    ) ?? 0;
 
   const getLoadingPage = (): JSX.Element => <CircularProgress />;
 
@@ -39,7 +37,6 @@ export const StartRepetitions = (): JSX.Element => {
       </Typography>
       <Button
         variant="contained"
-        style={{ marginTop: '1.5rem' }}
         onClick={e => {
           e.preventDefault();
           navigate('/repetitions', {
