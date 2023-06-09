@@ -7,6 +7,8 @@ import Pool from '../utils/users/UserPool';
 import { type TranslateRequest } from './requests/translateRequest';
 import { type TranslateResponse } from './responses/translateResponse';
 import { type CreateRepetitionRequest } from './requests/createRepetitionRequest';
+import { type GetRepetitionsResponseElement } from './responses/getRepetitionsResponseElement';
+import { type GetRepetitionsRequestParams } from './requests/getRepetitionsRequestParams';
 
 export default class Api {
   public static createClient(): AxiosInstance {
@@ -63,6 +65,13 @@ export default class Api {
 
   public static async createRepetition(body: CreateRepetitionRequest): Promise<CreateRepetitionRequest> {
     const response = await Api.createClient().post('/repetitions', body);
+    return response?.data;
+  }
+
+  public static async getRepetitions(params: GetRepetitionsRequestParams): Promise<GetRepetitionsResponseElement[]> {
+    const response = await Api.createClient().get('/repetitions', {
+      params,
+    });
     return response?.data;
   }
 }

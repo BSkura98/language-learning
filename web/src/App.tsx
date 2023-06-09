@@ -9,6 +9,7 @@ import { Translator } from './pages/Translator';
 import { NotFound } from './pages/NotFound';
 import { PrivateRoutes, PublicRoutes } from './components/Routes';
 import { Repetitions } from './pages/Repetitions';
+import { StartRepetitions } from './pages/StartRepetitions';
 import { Words } from './pages/Words';
 
 function App(): JSX.Element {
@@ -28,6 +29,7 @@ function App(): JSX.Element {
         <Route element={<PrivateRoutes />}>
           <Route path="/translator" element={<Translator />} />
           <Route path="/repetitions" element={<Repetitions />} />
+          <Route path="/startRepetitions" element={<StartRepetitions />} />
           <Route path="/words" element={<Words />} />
           <Route path="/" element={<Navigate to="/translator" replace />} />
           <Route path="*" element={<NotFound />} />

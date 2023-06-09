@@ -34,6 +34,12 @@
       "repetitionSuccessfullyAdded": "Repetition has been successfully created!",
       "repetitionNotCreated": "Error occurred while creating a repetition"
     },
+    "repetitions": {
+      "pageTitle": "Repetitions",
+      "pageDescription": "Start repetitions",
+      "startRepetitionsDescription": "Today you have {{repetitions}} repetitions to do ({{overdueRepetitions}} are overdue).",
+      "startRepetitions": "Start repetitions"
+    },
     "notFound": {
       "pageNotFound": "Page not found"
     }
