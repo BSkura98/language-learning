@@ -40,6 +40,15 @@
       "startRepetitionsDescription": "Today you have {{repetitions}} repetitions to do ({{overdueRepetitions}} are overdue).",
       "startRepetitions": "Start repetitions"
     },
+    "repetitions": {
+      "pageTitle": "Repetitions",
+      "pageDescription": "Repeat your words or phrases",
+      "completedRepetitionsInformation": "You have completed {{completedRepetitions}}/{{allRepetitions}} repetitions",
+      "revealAnswer": "Reveal answer",
+      "bad": "Bad",
+      "average": "Average",
+      "good": "Good"
+    },
     "notFound": {
       "pageNotFound": "Page not found"
     }
