@@ -1,16 +1,16 @@
 # language-learning-web
-This is a web application for a language learning system. The development process is still in progress.
+This is a web application for a language learning system.
 
 Existing features:
-* Log in
-* List supported languages
+* Loging in
+* Listing supported languages
 * Translator
-* Add word/phrases to repetitions
+* Adding word/phrases to repetitions
+* Learning through repetition system
 
 To do:
 * List repetitions
 * Modify/delete repetitions
-* Learn through repetition system
 * Sign up
 
 ## Screenshots
