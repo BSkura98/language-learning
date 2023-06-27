@@ -1,27 +1,60 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useLocation } from 'react-router';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
 import { Helmet } from 'react-helmet-async';
 import { Button, Stack, TextField, Typography } from '@mui/material';
 
 import { type GetRepetitionsResponseElement } from '../../api/responses/getRepetitionsResponseElement';
 import { RepetitionsPageWrapper } from './styled';
+import { RepetitionResult } from '../../api/requests/updateRepetitionRequest';
+import Api from '../../api/api';
+
+type RepetitionWithResult = GetRepetitionsResponseElement & { repetitionResult?: RepetitionResult };
 
 export const Repetitions = (): JSX.Element => {
   const { t } = useTranslation('translation', { keyPrefix: 'pages.repetitions' });
   const { state } = useLocation();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
+  const [remainedRepetitions, setRemainedRepetitions] = useState<RepetitionWithResult[]>(state.repetitions);
   const [completedRepetitions, setCompletedRepetitions] = useState(0);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [currentRepetition, setCurrentRepetition] = useState<GetRepetitionsResponseElement>(state.repetitions[0]);
   const [answerRevealed, setAnswerRevealed] = useState(false);
 
-  // TODO proper handling of result and moving to next repetition
-  const handleResultClick = (e: React.MouseEvent<HTMLElement>): void => {
+  const currentRepetition = useMemo(() => remainedRepetitions[0], [remainedRepetitions]);
+  const navigate = useNavigate();
+
+  const saveRepetitionResultMutation = useMutation({
+    mutationFn: Api.updateRepetition,
+  });
+
+  const setCurrentRepetitionToQueueEnd = (repetitionResult: RepetitionResult): void => {
+    const [currentRepetitions, ...rest] = remainedRepetitions;
+    const newRemainedRepetitions = [...rest, { ...currentRepetitions, repetitionResult }];
+    setRemainedRepetitions(newRemainedRepetitions);
+  };
+
+  const handleResultClick = (e: React.MouseEvent<HTMLElement>, repetitionResult: RepetitionResult): void => {
     e.preventDefault();
-    setCompletedRepetitions(1);
-    setCurrentRepetition(state.repetitions[1]);
     setAnswerRevealed(false);
+
+    if (!currentRepetition.repetitionResult) {
+      saveRepetitionResultMutation.mutate({ id: currentRepetition.id, repetitionResult });
+    }
+
+    if (repetitionResult === RepetitionResult.success) {
+      if (remainedRepetitions.length === 1) {
+        navigate('/finishedRepetitions');
+      }
+      setCompletedRepetitions(completedRepetitions + 1);
+      setRemainedRepetitions(remainedRepetitions.slice(1));
+    }
+    if (repetitionResult === RepetitionResult.partialSuccess) {
+      setCurrentRepetitionToQueueEnd(repetitionResult);
+    }
+    if (repetitionResult === RepetitionResult.failure) {
+      setCurrentRepetitionToQueueEnd(repetitionResult);
+    }
   };
 
   return (
@@ -47,17 +80,17 @@ export const Repetitions = (): JSX.Element => {
         >
           {t('revealAnswer')}
         </Button>
-        {!answerRevealed || (
+        {answerRevealed && (
           <>
             <TextField multiline rows={5} fullWidth value={currentRepetition.targetLanguageText} disabled />
             <Stack direction="row" spacing={2}>
-              <Button variant="outlined" onClick={handleResultClick} color="error">
+              <Button variant="outlined" onClick={e => handleResultClick(e, RepetitionResult.failure)} color="error">
                 {t('bad')}
               </Button>
-              <Button variant="outlined" onClick={handleResultClick}>
+              <Button variant="outlined" onClick={e => handleResultClick(e, RepetitionResult.partialSuccess)}>
                 {t('average')}
               </Button>
-              <Button variant="outlined" onClick={handleResultClick} color="success">
+              <Button variant="outlined" onClick={e => handleResultClick(e, RepetitionResult.success)} color="success">
                 {t('good')}
               </Button>
             </Stack>

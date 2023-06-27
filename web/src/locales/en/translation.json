@@ -49,6 +49,11 @@
       "average": "Average",
       "good": "Good"
     },
+    "finishedRepetitions": {
+      "pageTitle": "Repetitions",
+      "pageDescription": "You've completed all the repetitions for today",
+      "completedRepetitionsMessage": "Congratulations, you've completed all the repetitions for today!"
+    },
     "notFound": {
       "pageNotFound": "Page not found"
     }

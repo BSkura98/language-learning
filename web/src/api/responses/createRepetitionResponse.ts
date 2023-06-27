@@ -1,4 +1,4 @@
-export interface CreateRepetitionRequest {
+export interface CreateRepetitionResponse {
   id: string;
   userId: string;
   sourceLanguage: string;
