@@ -9,6 +9,8 @@ import { type TranslateResponse } from './responses/translateResponse';
 import { type CreateRepetitionRequest } from './requests/createRepetitionRequest';
 import { type GetRepetitionsResponseElement } from './responses/getRepetitionsResponseElement';
 import { type GetRepetitionsRequestParams } from './requests/getRepetitionsRequestParams';
+import { type CreateRepetitionResponse } from './responses/createRepetitionResponse';
+import { type UpdateRepetitionRequest } from './requests/updateRepetitionRequest';
 
 export default class Api {
   public static createClient(): AxiosInstance {
@@ -63,7 +65,7 @@ export default class Api {
     return response?.data;
   }
 
-  public static async createRepetition(body: CreateRepetitionRequest): Promise<CreateRepetitionRequest> {
+  public static async createRepetition(body: CreateRepetitionRequest): Promise<CreateRepetitionResponse> {
     const response = await Api.createClient().post('/repetitions', body);
     return response?.data;
   }
@@ -73,5 +75,9 @@ export default class Api {
       params,
     });
     return response?.data;
+  }
+
+  public static async updateRepetition(params: UpdateRepetitionRequest): Promise<void> {
+    await Api.createClient().patch(`/repetitions/${params.id}`, params);
   }
 }
