@@ -3,10 +3,10 @@ import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet-async';
 import { Typography } from '@mui/material';
 
-import { FinishedRepetitionsPageWrapper } from './styled';
+import { CompletedRepetitionsPageWrapper } from './styled';
 
-export const FinishedRepetitions = (): JSX.Element => {
-  const { t } = useTranslation('translation', { keyPrefix: 'pages.finishedRepetitions' });
+export const CompletedRepetitions = (): JSX.Element => {
+  const { t } = useTranslation('translation', { keyPrefix: 'pages.completedRepetitions' });
 
   return (
     <>
@@ -14,11 +14,11 @@ export const FinishedRepetitions = (): JSX.Element => {
         <title>{t('pageTitle')}</title>
         <meta name="description" content={`${t('pageDescription')}`} />
       </Helmet>
-      <FinishedRepetitionsPageWrapper>
+      <CompletedRepetitionsPageWrapper>
         <Typography variant="h6" gutterBottom>
           {t('completedRepetitionsMessage')}
         </Typography>
-      </FinishedRepetitionsPageWrapper>
+      </CompletedRepetitionsPageWrapper>
     </>
   );
 };

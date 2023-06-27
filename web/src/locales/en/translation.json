@@ -49,7 +49,7 @@
       "average": "Average",
       "good": "Good"
     },
-    "finishedRepetitions": {
+    "completedRepetitions": {
       "pageTitle": "Repetitions",
       "pageDescription": "You've completed all the repetitions for today",
       "completedRepetitionsMessage": "Congratulations, you've completed all the repetitions for today!"

@@ -11,7 +11,7 @@ import { PrivateRoutes, PublicRoutes } from './components/Routes';
 import { Repetitions } from './pages/Repetitions';
 import { StartRepetitions } from './pages/StartRepetitions';
 import { Words } from './pages/Words';
-import { FinishedRepetitions } from './pages/FinishedRepetitions';
+import { CompletedRepetitions } from './pages/CompletedRepetitions';
 
 function App(): JSX.Element {
   const { t } = useTranslation();
@@ -31,7 +31,7 @@ function App(): JSX.Element {
           <Route path="/translator" element={<Translator />} />
           <Route path="/repetitions" element={<Repetitions />} />
           <Route path="/startRepetitions" element={<StartRepetitions />} />
-          <Route path="/finishedRepetitions" element={<FinishedRepetitions />} />
+          <Route path="/completedRepetitions" element={<CompletedRepetitions />} />
           <Route path="/words" element={<Words />} />
           <Route path="/" element={<Navigate to="/translator" replace />} />
           <Route path="*" element={<NotFound />} />
