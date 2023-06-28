@@ -70,7 +70,14 @@ export const Repetitions = (): JSX.Element => {
             allRepetitions: state.repetitions.length,
           })}
         </Typography>
-        <TextField multiline rows={5} fullWidth value={currentRepetition.sourceLanguageText} disabled />
+        <TextField
+          multiline
+          rows={5}
+          fullWidth
+          value={currentRepetition.sourceLanguageText}
+          label={currentRepetition.sourceLanguage}
+          disabled
+        />
         <Button
           variant="contained"
           onClick={e => {
@@ -78,11 +85,18 @@ export const Repetitions = (): JSX.Element => {
             setAnswerRevealed(true);
           }}
         >
-          {t('revealAnswer')}
+          {t('revealAnswer', { targetLanguage: currentRepetition.targetLanguage })}
         </Button>
         {answerRevealed && (
           <>
-            <TextField multiline rows={5} fullWidth value={currentRepetition.targetLanguageText} disabled />
+            <TextField
+              multiline
+              rows={5}
+              fullWidth
+              value={currentRepetition.targetLanguageText}
+              label={currentRepetition.targetLanguage}
+              disabled
+            />
             <Stack direction="row" spacing={2}>
               <Button variant="outlined" onClick={e => handleResultClick(e, RepetitionResult.failure)} color="error">
                 {t('bad')}
