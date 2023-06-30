@@ -38,7 +38,8 @@
       "pageTitle": "Repetitions",
       "pageDescription": "Start repetitions",
       "startRepetitionsDescription": "Today you have {{repetitions}} repetitions to do ({{overdueRepetitions}} are overdue).",
-      "startRepetitions": "Start repetitions"
+      "startRepetitions": "Start repetitions",
+      "noRepetitions": "Great! There are no repetitions left for today!"
     },
     "repetitions": {
       "pageTitle": "Repetitions",
