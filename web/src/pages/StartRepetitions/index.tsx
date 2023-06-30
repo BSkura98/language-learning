@@ -27,7 +27,13 @@ export const StartRepetitions = (): JSX.Element => {
 
   const getLoadingPage = (): JSX.Element => <CircularProgress />;
 
-  const getLoadedPage = (): JSX.Element => (
+  const getNoRepetitionsPage = (): JSX.Element => (
+    <Typography variant="h6" gutterBottom>
+      {t('noRepetitions')}
+    </Typography>
+  );
+
+  const getStartRepetitionsPage = (): JSX.Element => (
     <>
       <Typography variant="h6" gutterBottom>
         {t('startRepetitionsDescription', {
@@ -51,15 +57,19 @@ export const StartRepetitions = (): JSX.Element => {
     </>
   );
 
+  const getPageContent = (): JSX.Element => {
+    if (getRepetitionsQuery.isLoading) return getLoadingPage();
+    if (getRepetitionsQuery.data?.length === 0) return getNoRepetitionsPage();
+    return getStartRepetitionsPage();
+  };
+
   return (
     <>
       <Helmet>
         <title>{t('pageTitle')}</title>
         <meta name="description" content={`${t('pageDescription')}`} />
       </Helmet>
-      <RepetitionsPageWrapper>
-        {getRepetitionsQuery.isLoading ? getLoadingPage() : getLoadedPage()}
-      </RepetitionsPageWrapper>
+      <RepetitionsPageWrapper>{getPageContent()}</RepetitionsPageWrapper>
     </>
   );
 };

@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { useLocation } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Helmet } from 'react-helmet-async';
 import { Button, Stack, TextField, Typography } from '@mui/material';
 
@@ -16,9 +16,10 @@ type RepetitionWithResult = GetRepetitionsResponseElement & { repetitionResult?:
 export const Repetitions = (): JSX.Element => {
   const { t } = useTranslation('translation', { keyPrefix: 'pages.repetitions' });
   const { state } = useLocation();
+  const queryClient = useQueryClient();
 
   const [remainedRepetitions, setRemainedRepetitions] = useState<RepetitionWithResult[]>(state.repetitions);
-  const [completedRepetitions, setCompletedRepetitions] = useState(0);
+  const [completedRepetitionsCounter, setCompletedRepetitionsCounter] = useState(0);
   const [answerRevealed, setAnswerRevealed] = useState(false);
 
   const currentRepetition = useMemo(() => remainedRepetitions[0], [remainedRepetitions]);
@@ -40,13 +41,14 @@ export const Repetitions = (): JSX.Element => {
 
     if (!currentRepetition.repetitionResult) {
       saveRepetitionResultMutation.mutate({ id: currentRepetition.id, repetitionResult });
+      void queryClient.invalidateQueries({ queryKey: ['getRepetitions'] });
     }
 
     if (repetitionResult === RepetitionResult.success) {
       if (remainedRepetitions.length === 1) {
-        navigate('/finishedRepetitions');
+        navigate('/completedRepetitions');
       }
-      setCompletedRepetitions(completedRepetitions + 1);
+      setCompletedRepetitionsCounter(completedRepetitionsCounter + 1);
       setRemainedRepetitions(remainedRepetitions.slice(1));
     }
     if (repetitionResult === RepetitionResult.partialSuccess) {
@@ -66,7 +68,7 @@ export const Repetitions = (): JSX.Element => {
       <RepetitionsPageWrapper $variant="narrow">
         <Typography variant="subtitle1">
           {t('completedRepetitionsInformation', {
-            completedRepetitions,
+            completedRepetitions: completedRepetitionsCounter,
             allRepetitions: state.repetitions.length,
           })}
         </Typography>
