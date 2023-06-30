@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useMemo, useState } from 'react';
 import { useLocation } from 'react-router';
 import { useTranslation } from 'react-i18next';
