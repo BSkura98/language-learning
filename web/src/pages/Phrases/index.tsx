@@ -32,10 +32,7 @@ export const Phrases = (): JSX.Element => {
     </>
   );
 
-  const getPageContent = (): JSX.Element => {
-    if (getRepetitionsQuery.isLoading) return getLoadingPage();
-    return getLoadedPage();
-  };
+  const getPageContent = (): JSX.Element => (getRepetitionsQuery.isLoading ? getLoadingPage() : getLoadedPage());
 
   return (
     <>
