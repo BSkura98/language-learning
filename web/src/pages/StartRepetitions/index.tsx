@@ -15,7 +15,7 @@ export const StartRepetitions = (): JSX.Element => {
   const navigate = useNavigate();
 
   const getRepetitionsQuery = useQuery({
-    queryKey: ['getRepetitions'],
+    queryKey: ['getTodaysRepetitions'],
     queryFn: async () => await Api.getRepetitions({ endDate: endOfDay(new Date()) }),
   });
 

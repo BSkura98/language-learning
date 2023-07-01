@@ -98,7 +98,7 @@ const ResponsiveAppBar = (): JSX.Element => {
               }}
             >
               <MenuItem
-                key={t('translator')}
+                key="translator"
                 onClick={e => {
                   e.preventDefault();
                   navigate('/translator');
@@ -107,7 +107,7 @@ const ResponsiveAppBar = (): JSX.Element => {
                 <Typography textAlign="center">{t('translator')}</Typography>
               </MenuItem>
               <MenuItem
-                key={t('repetitions')}
+                key="repetitions"
                 onClick={e => {
                   e.preventDefault();
                   navigate('/startRepetitions');
@@ -116,13 +116,13 @@ const ResponsiveAppBar = (): JSX.Element => {
                 <Typography textAlign="center">{t('repetitions')}</Typography>
               </MenuItem>
               <MenuItem
-                key={t('words')}
+                key="phrases"
                 onClick={e => {
                   e.preventDefault();
-                  navigate('/words');
+                  navigate('/phrases');
                 }}
               >
-                <Typography textAlign="center">{t('words')}</Typography>
+                <Typography textAlign="center">{t('phrases')}</Typography>
               </MenuItem>
             </Menu>
           </Box>
@@ -146,7 +146,7 @@ const ResponsiveAppBar = (): JSX.Element => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <Button
-              key={t('translator')}
+              key="translator"
               onClick={e => {
                 e.preventDefault();
                 navigate('/translator');
@@ -156,7 +156,7 @@ const ResponsiveAppBar = (): JSX.Element => {
               {t('translator')}
             </Button>
             <Button
-              key={t('repetitions')}
+              key="repetitions"
               onClick={e => {
                 e.preventDefault();
                 navigate('/startRepetitions');
@@ -166,14 +166,14 @@ const ResponsiveAppBar = (): JSX.Element => {
               {t('repetitions')}
             </Button>
             <Button
-              key={t('words')}
+              key="phrases"
               onClick={e => {
                 e.preventDefault();
-                navigate('/words');
+                navigate('/phrases');
               }}
               sx={{ my: 2, color: 'white', display: 'block' }}
             >
-              {t('words')}
+              {t('phrases')}
             </Button>
           </Box>
 

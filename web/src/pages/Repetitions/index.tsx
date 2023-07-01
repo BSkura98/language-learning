@@ -27,6 +27,9 @@ export const Repetitions = (): JSX.Element => {
 
   const saveRepetitionResultMutation = useMutation({
     mutationFn: Api.updateRepetition,
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: ['getTodaysRepetitions'] });
+    },
   });
 
   const setCurrentRepetitionToQueueEnd = (repetitionResult: RepetitionResult): void => {
@@ -41,7 +44,6 @@ export const Repetitions = (): JSX.Element => {
 
     if (!currentRepetition.repetitionResult) {
       saveRepetitionResultMutation.mutate({ id: currentRepetition.id, repetitionResult });
-      void queryClient.invalidateQueries({ queryKey: ['getRepetitions'] });
     }
 
     if (repetitionResult === RepetitionResult.success) {

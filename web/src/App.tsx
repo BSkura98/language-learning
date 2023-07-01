@@ -10,7 +10,7 @@ import { NotFound } from './pages/NotFound';
 import { PrivateRoutes, PublicRoutes } from './components/Routes';
 import { Repetitions } from './pages/Repetitions';
 import { StartRepetitions } from './pages/StartRepetitions';
-import { Words } from './pages/Words';
+import { Phrases } from './pages/Phrases';
 import { CompletedRepetitions } from './pages/CompletedRepetitions';
 
 function App(): JSX.Element {
@@ -32,7 +32,7 @@ function App(): JSX.Element {
           <Route path="/repetitions" element={<Repetitions />} />
           <Route path="/startRepetitions" element={<StartRepetitions />} />
           <Route path="/completedRepetitions" element={<CompletedRepetitions />} />
-          <Route path="/words" element={<Words />} />
+          <Route path="/phrases" element={<Phrases />} />
           <Route path="/" element={<Navigate to="/translator" replace />} />
           <Route path="*" element={<NotFound />} />
         </Route>
