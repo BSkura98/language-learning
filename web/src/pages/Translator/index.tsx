@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet-async';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Grid from '@mui/material/Unstable_Grid2';
 import { Button, type SelectChangeEvent, TextField, Typography, Stack } from '@mui/material';
 import SyncAltIcon from '@mui/icons-material/SyncAlt';
@@ -15,6 +15,7 @@ import Api from '../../api/api';
 
 export const Translator = (): JSX.Element => {
   const { t } = useTranslation('translation', { keyPrefix: 'pages.translator' });
+  const queryClient = useQueryClient();
 
   const [sourceLanguage, setSourceLanguage] = useState('auto');
   const [targetLanguage, setTargetLanguage] = useState('en');
@@ -39,7 +40,10 @@ export const Translator = (): JSX.Element => {
 
   const addRepetitionMutation = useMutation({
     mutationFn: Api.createRepetition,
-    onSuccess: () => toast.success(t('repetitionSuccessfullyAdded')),
+    onSuccess: () => {
+      toast.success(t('repetitionSuccessfullyAdded'));
+      void queryClient.invalidateQueries({ queryKey: ['getRepetitions'] });
+    },
     onError: () => toast.success(t('repetitionNotCreated')),
   });
 

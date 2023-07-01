@@ -6,7 +6,7 @@
       "title": "Language learning",
       "translator": "Translator",
       "repetitions": "Repetitions",
-      "words": "Words",
+      "phrases": "Saved phrases",
       "logout": "Logout"
     },
     "passwordTextField": {
@@ -54,6 +54,14 @@
       "pageTitle": "Repetitions",
       "pageDescription": "You've completed all the repetitions for today",
       "completedRepetitionsMessage": "Congratulations, you've completed all the repetitions for today!"
+    },
+    "phrases": {
+      "pageTitle": "Saved phrases",
+      "pageDescription": "Saved words and phrases for repetitions",
+      "savedPhrases": "Saved words and phrases",
+      "sourceText": "Source text",
+      "targetText": "Target text",
+      "nextRepetitionDate": "Next repetition date"
     },
     "notFound": {
       "pageNotFound": "Page not found"

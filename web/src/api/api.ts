@@ -70,7 +70,7 @@ export default class Api {
     return response?.data;
   }
 
-  public static async getRepetitions(params: GetRepetitionsRequestParams): Promise<GetRepetitionsResponseElement[]> {
+  public static async getRepetitions(params?: GetRepetitionsRequestParams): Promise<GetRepetitionsResponseElement[]> {
     const response = await Api.createClient().get('/repetitions', {
       params,
     });
