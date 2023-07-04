@@ -29,5 +29,6 @@ module.exports = {
     '@typescript-eslint/strict-boolean-expressions': [0],
     '@typescript-eslint/no-extraneous-class': [0],
     '@typescript-eslint/no-confusing-void-expression': [0],
+    '@typescript-eslint/no-non-null-assertion': [0],
   },
 };

@@ -80,4 +80,8 @@ export default class Api {
   public static async updateRepetition(params: UpdateRepetitionRequest): Promise<void> {
     await Api.createClient().patch(`/repetitions/${params.id}`, params);
   }
+
+  public static async deleteRepetition(id: string): Promise<void> {
+    await Api.createClient().delete(`/repetitions/${id}`);
+  }
 }
