@@ -7,10 +7,11 @@ Existing features:
 * Translator
 * Adding word/phrases to repetitions
 * Learning through repetition system
-* Listing repetitions
+* List of saved repetitions
+* Deleting repetitions
 
 To do:
-* Modify/delete repetitions
+* Modifying repetitions
 * Sign up
 
 ## Screenshots

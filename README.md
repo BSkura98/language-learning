@@ -23,10 +23,11 @@ This is an application which allows users for translating texts and learning wor
 * Learning through repetition system
 * CRUD operations on repetitions (backend)
 * Calculations of a next repetition date for a repetition result
-* Listing repetitions
+* List of saved repetitions
+* Deleting repetitions
 
 To do in web application:
-* Modify/delete repetitions on web
+* Modifying repetitions on web
 * Sign up
 
 ## Endpoints
