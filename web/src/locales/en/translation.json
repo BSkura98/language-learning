@@ -67,6 +67,13 @@
         "dialogDescription": "This action is irreversible. This word/phrase will no longer appear in your repetitions.",
         "yes": "Yes",
         "no": "No"
+      },
+      "editRepetitionDialog": {
+        "dialogTitle": "Edit item",
+        "sourceTextLabel": "Source text ({{language}})",
+        "targetTextLabel": "Target text ({{language}})",
+        "save": "Save",
+        "close": "Close"
       }
     },
     "notFound": {
