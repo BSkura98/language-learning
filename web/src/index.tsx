@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Amplify } from 'aws-amplify';
 import { ToastContainer } from 'react-toastify';
+import { ThemeProvider, createTheme } from '@mui/material';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { AccountProvider } from './utils/users/Account';
@@ -21,26 +22,46 @@ const queryClient = new QueryClient({
   defaultOptions: { queries: { staleTime: 1000 * 60 * 5 } },
 });
 
+const theme = createTheme({
+  typography: {
+    fontFamily: [
+      '"Segoe UI"',
+      'Arial',
+      'Roboto',
+      '"Helvetica Neue"',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+    button: {
+      textTransform: 'none',
+    },
+  },
+});
+
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <HelmetProvider>
     <AccountProvider>
       <QueryClientProvider client={queryClient}>
-        <React.StrictMode>
-          <ToastContainer
-            position="top-center"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="light"
-          />
-          <App />
-        </React.StrictMode>
+        <ThemeProvider theme={theme}>
+          <React.StrictMode>
+            <ToastContainer
+              position="top-center"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+            />
+            <App />
+          </React.StrictMode>
+        </ThemeProvider>
         {isLocalhost() && <ReactQueryDevtools />}
       </QueryClientProvider>
     </AccountProvider>

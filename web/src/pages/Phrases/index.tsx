@@ -25,7 +25,7 @@ export const Phrases = (): JSX.Element => {
 
   const getLoadedPage = (): JSX.Element => (
     <>
-      <Typography variant="h5" gutterBottom>
+      <Typography variant="h6" style={{ marginBottom: '2rem' }} gutterBottom>
         {t('savedPhrases')}
       </Typography>
       <PhrasesTable repetitions={getRepetitionsQuery.data} />

@@ -89,7 +89,7 @@ export const Translator = (): JSX.Element => {
       </Helmet>
       <TranslatorPageWrapper>
         <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={2}>
-          <Typography variant="h5" gutterBottom>
+          <Typography variant="h6" gutterBottom>
             {t('translator')}
           </Typography>
           <Button
