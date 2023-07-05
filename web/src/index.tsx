@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Amplify } from 'aws-amplify';
 import { ToastContainer } from 'react-toastify';
+import { ThemeProvider } from '@mui/material';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { AccountProvider } from './utils/users/Account';
@@ -14,6 +15,7 @@ import reportWebVitals from './reportWebVitals';
 import './i18next';
 import awsExports from './aws-exports';
 import { isLocalhost } from './helpers/isLocalhost';
+import { theme } from './theme/theme';
 
 Amplify.configure(awsExports);
 
@@ -26,21 +28,23 @@ root.render(
   <HelmetProvider>
     <AccountProvider>
       <QueryClientProvider client={queryClient}>
-        <React.StrictMode>
-          <ToastContainer
-            position="top-center"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="light"
-          />
-          <App />
-        </React.StrictMode>
+        <ThemeProvider theme={theme}>
+          <React.StrictMode>
+            <ToastContainer
+              position="top-center"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+            />
+            <App />
+          </React.StrictMode>
+        </ThemeProvider>
         {isLocalhost() && <ReactQueryDevtools />}
       </QueryClientProvider>
     </AccountProvider>

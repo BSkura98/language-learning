@@ -2,12 +2,12 @@ import React, { memo, useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Alert, TextField, Typography } from '@mui/material';
 import { Helmet } from 'react-helmet-async';
-import { LoadingButton } from '@mui/lab';
 import { useNavigate } from 'react-router-dom';
 
 import { LoginForm, Wrapper } from './styled';
 import { PasswordTextField } from '../../components/PasswordTextField';
 import { AccountContext } from '../../utils/users/Account';
+import { Button } from '../../components/Button/styled';
 
 export const LogIn = memo((): JSX.Element => {
   const { t } = useTranslation('translation', { keyPrefix: 'pages.logIn' });
@@ -62,9 +62,9 @@ export const LogIn = memo((): JSX.Element => {
             value={password}
           />
           {error !== '' && <Alert severity="error">{error}</Alert>}
-          <LoadingButton variant="contained" loading={loading} loadingPosition="start" type="submit">
+          <Button variant="contained" loading={loading} loadingPosition="start" type="submit">
             {t('logInButton')}
-          </LoadingButton>
+          </Button>
         </LoginForm>
       </Wrapper>
     </>

@@ -59,10 +59,11 @@ const ResponsiveAppBar = (): JSX.Element => {
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
-              fontFamily: '"Segoe UI Symbol"',
+              fontFamily: 'cursive',
               fontWeight: 700,
               color: 'inherit',
               textDecoration: 'none',
+              marginRight: '2rem',
             }}
           >
             {t('title')}
@@ -136,7 +137,7 @@ const ResponsiveAppBar = (): JSX.Element => {
               mr: 2,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
-              fontFamily: '"Segoe UI Symbol"',
+              fontFamily: 'cursive',
               fontWeight: 700,
               color: 'inherit',
               textDecoration: 'none',
