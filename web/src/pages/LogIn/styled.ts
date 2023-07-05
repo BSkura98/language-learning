@@ -31,7 +31,6 @@ export const LoginForm = styled.form`
     width: 80%;
     margin-top: 0rem;
     margin-bottom: 1rem;
-    /* margin: 0 auto 1rem 0; */
   }
 
   .MuiPaper-root {
@@ -40,6 +39,5 @@ export const LoginForm = styled.form`
 
   .MuiLoadingButton-root {
     margin-top: 1rem;
-    /* width: 10rem; */
   }
 `;

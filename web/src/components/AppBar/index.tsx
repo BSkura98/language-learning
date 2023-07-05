@@ -13,7 +13,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import PublicIcon from '@mui/icons-material/Public';
-// import PublicIcon from '@mui/icons-material/PublicTwoTone';
 
 import { AccountContext } from '../../utils/users/Account';
 
