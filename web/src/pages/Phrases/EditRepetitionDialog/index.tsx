@@ -37,11 +37,9 @@ export const EditRepetitionDialog = ({ open, onClose, repetition }: Props): JSX.
       <DialogTitle id="edit-repetition-dialog-title">{t('dialogTitle')}</DialogTitle>
       <DialogContent>
         <TextField
-          autoFocus
-          margin="dense"
-          id="name"
+          margin="normal"
+          id="source-text"
           label={t('sourceTextLabel', { language: repetition?.sourceLanguage })}
-          type="email"
           fullWidth
           variant="outlined"
           value={sourceLanguageText}
@@ -49,17 +47,14 @@ export const EditRepetitionDialog = ({ open, onClose, repetition }: Props): JSX.
           error={!sourceLanguageText}
         />
         <TextField
-          autoFocus
-          margin="dense"
-          id="name"
+          margin="normal"
+          id="target-dext"
           label={t('targetTextLabel', { language: repetition?.targetLanguage })}
-          type="email"
           fullWidth
           variant="outlined"
           value={targetLanguageText}
           onChange={e => setTargetLanguageText(e.target.value)}
           error={!targetLanguageText}
-          style={{ marginTop: '2rem' }}
         />
       </DialogContent>
       <DialogActions>
