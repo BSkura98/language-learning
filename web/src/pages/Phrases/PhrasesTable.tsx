@@ -2,35 +2,47 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
-import { type GetRepetitionsResponseElement } from '../../api/responses/getRepetitionsResponseElement';
+import { type GetRepetitionsResponseElement as Repetition } from '../../api/responses/getRepetitionsResponseElement';
 import { DeleteRepetitionDialog } from './DeleteRepetitionDialog';
+import { EditRepetitionDialog } from './EditRepetitionDialog';
 
 interface Props {
-  repetitions?: GetRepetitionsResponseElement[];
+  repetitions?: Repetition[];
 }
 
 export const PhrasesTable = ({ repetitions }: Props): JSX.Element => {
   const { t } = useTranslation('translation', { keyPrefix: 'pages.phrases' });
   const [selectedToDeletionRepetitionId, setSelectedToDeletionRepetitionId] = useState<string | null>(null);
+  const [selectedToEditionRepetition, setSelectedToEditionRepetition] = useState<Repetition | null>(null);
 
   return (
     <>
-      <DeleteRepetitionDialog
-        open={Boolean(selectedToDeletionRepetitionId)}
-        onClose={() => setSelectedToDeletionRepetitionId(null)}
-        repetitionId={selectedToDeletionRepetitionId!}
-      />
+      {selectedToEditionRepetition && (
+        <EditRepetitionDialog
+          open={Boolean(selectedToEditionRepetition)}
+          onClose={() => setSelectedToEditionRepetition(null)}
+          repetition={selectedToEditionRepetition}
+        />
+      )}
+      {selectedToEditionRepetition && (
+        <DeleteRepetitionDialog
+          open={Boolean(selectedToDeletionRepetitionId)}
+          onClose={() => setSelectedToDeletionRepetitionId(null)}
+          repetitionId={selectedToDeletionRepetitionId!}
+        />
+      )}
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="phrases table">
           <TableHead>
             <TableRow>
-              <TableCell width="40%">{t('sourceText')}</TableCell>
-              <TableCell width="40%">{t('targetText')}</TableCell>
-              <TableCell width="15%" align="right">
+              <TableCell width="38%">{t('sourceText')}</TableCell>
+              <TableCell width="38%">{t('targetText')}</TableCell>
+              <TableCell width="14%" align="right">
                 {t('nextRepetitionDate')}
               </TableCell>
-              <TableCell width="5%" align="right"></TableCell>
+              <TableCell width="10%%" align="right"></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -46,7 +58,16 @@ export const PhrasesTable = ({ repetitions }: Props): JSX.Element => {
                   <b>{repetition.targetLanguage}</b> {repetition.targetLanguageText}
                 </TableCell>
                 <TableCell align="right">{new Date(repetition.nextRepetitionDate).toDateString()}</TableCell>
-                <TableCell align="right">
+                <TableCell>
+                  <IconButton
+                    aria-label="edit"
+                    onClick={e => {
+                      e.preventDefault();
+                      setSelectedToEditionRepetition(repetition);
+                    }}
+                  >
+                    <EditIcon />
+                  </IconButton>
                   <IconButton
                     aria-label="delete"
                     onClick={e => {
