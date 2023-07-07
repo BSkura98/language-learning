@@ -44,7 +44,6 @@
     "repetitions": {
       "pageTitle": "Repetitions",
       "pageDescription": "Repeat your words or phrases",
-      "completedRepetitionsInformation": "You have completed {{completedRepetitions}}/{{allRepetitions}} repetitions",
       "revealAnswer": "Reveal answer ({{targetLanguage}})",
       "bad": "Bad",
       "average": "Average",

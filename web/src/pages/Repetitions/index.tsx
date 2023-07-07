@@ -4,12 +4,17 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Helmet } from 'react-helmet-async';
-import { Button, Stack, TextField, Typography } from '@mui/material';
+import { Box, Button, Stack, TextField } from '@mui/material';
+import SentimentNeutralIcon from '@mui/icons-material/SentimentNeutral';
+import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
+import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
+import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 
 import { type GetRepetitionsResponseElement } from '../../api/responses/getRepetitionsResponseElement';
 import { RepetitionsPageWrapper } from './styled';
 import { RepetitionResult } from '../../api/requests/updateRepetitionRequest';
 import Api from '../../api/api';
+import { LinearProgressWithLabel } from '../../components/LinearProgressWithLabel';
 
 type RepetitionWithResult = GetRepetitionsResponseElement & { repetitionResult?: RepetitionResult };
 
@@ -68,12 +73,12 @@ export const Repetitions = (): JSX.Element => {
         <meta name="description" content={`${t('pageDescription')}`} />
       </Helmet>
       <RepetitionsPageWrapper $variant="narrow">
-        <Typography variant="subtitle1">
-          {t('completedRepetitionsInformation', {
-            completedRepetitions: completedRepetitionsCounter,
-            allRepetitions: state.repetitions.length,
-          })}
-        </Typography>
+        <Box sx={{ width: '100%' }}>
+          <LinearProgressWithLabel
+            value={(completedRepetitionsCounter / state.repetitions.length) * 100}
+            label={`${completedRepetitionsCounter}/${state.repetitions.length as number}`}
+          />
+        </Box>
         <TextField
           multiline
           rows={5}
@@ -88,6 +93,7 @@ export const Repetitions = (): JSX.Element => {
             e.preventDefault();
             setAnswerRevealed(true);
           }}
+          startIcon={<QuestionAnswerIcon />}
         >
           {t('revealAnswer', { targetLanguage: currentRepetition.targetLanguage })}
         </Button>
@@ -102,13 +108,27 @@ export const Repetitions = (): JSX.Element => {
               disabled
             />
             <Stack direction="row" spacing={2}>
-              <Button variant="outlined" onClick={e => handleResultClick(e, RepetitionResult.failure)} color="error">
+              <Button
+                variant="outlined"
+                onClick={e => handleResultClick(e, RepetitionResult.failure)}
+                color="error"
+                startIcon={<SentimentVeryDissatisfiedIcon />}
+              >
                 {t('bad')}
               </Button>
-              <Button variant="outlined" onClick={e => handleResultClick(e, RepetitionResult.partialSuccess)}>
+              <Button
+                variant="outlined"
+                onClick={e => handleResultClick(e, RepetitionResult.partialSuccess)}
+                startIcon={<SentimentNeutralIcon />}
+              >
                 {t('average')}
               </Button>
-              <Button variant="outlined" onClick={e => handleResultClick(e, RepetitionResult.success)} color="success">
+              <Button
+                variant="outlined"
+                onClick={e => handleResultClick(e, RepetitionResult.success)}
+                color="success"
+                startIcon={<SentimentSatisfiedAltIcon />}
+              >
                 {t('good')}
               </Button>
             </Stack>

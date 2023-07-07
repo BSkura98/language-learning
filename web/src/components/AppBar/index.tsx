@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import AppBar from '@mui/material/AppBar';
@@ -10,20 +10,32 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import PublicIcon from '@mui/icons-material/Public';
 
 import { AccountContext } from '../../utils/users/Account';
+import { AppBarButton } from './components/AppBarButton';
 
 const ResponsiveAppBar = (): JSX.Element => {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
   const navigate = useNavigate();
   const { t } = useTranslation('translation', { keyPrefix: 'components.appBar' });
   const { getSession, logout } = useContext(AccountContext);
   const userEmail = useMemo(() => getSession()?.idToken.payload.email, []);
+
+  const menuItemsOptions = [
+    { key: 'translator', navigate: '/translator', label: t('translator') },
+    {
+      key: 'repetitions',
+      navigate: '/startRepetitions',
+      label: t('repetitions'),
+    },
+    { key: 'phrases', navigate: '/phrases', label: t('phrases') },
+  ];
+
+  const [selectedMenuItemKey, setSelectedMenuItemKey] = useState('translator');
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>): void => {
     setAnchorElNav(event.currentTarget);
@@ -98,33 +110,17 @@ const ResponsiveAppBar = (): JSX.Element => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              <MenuItem
-                key="translator"
-                onClick={e => {
-                  e.preventDefault();
-                  navigate('/translator');
-                }}
-              >
-                <Typography textAlign="center">{t('translator')}</Typography>
-              </MenuItem>
-              <MenuItem
-                key="repetitions"
-                onClick={e => {
-                  e.preventDefault();
-                  navigate('/startRepetitions');
-                }}
-              >
-                <Typography textAlign="center">{t('repetitions')}</Typography>
-              </MenuItem>
-              <MenuItem
-                key="phrases"
-                onClick={e => {
-                  e.preventDefault();
-                  navigate('/phrases');
-                }}
-              >
-                <Typography textAlign="center">{t('phrases')}</Typography>
-              </MenuItem>
+              {menuItemsOptions.map(item => (
+                <MenuItem
+                  key={item.key}
+                  onClick={e => {
+                    e.preventDefault();
+                    navigate(item.navigate);
+                  }}
+                >
+                  <Typography textAlign="center">{item.label}</Typography>
+                </MenuItem>
+              ))}
             </Menu>
           </Box>
           <PublicIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -146,36 +142,18 @@ const ResponsiveAppBar = (): JSX.Element => {
             {t('title')}
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            <Button
-              key="translator"
-              onClick={e => {
-                e.preventDefault();
-                navigate('/translator');
-              }}
-              sx={{ my: 2, color: 'white', display: 'block' }}
-            >
-              {t('translator')}
-            </Button>
-            <Button
-              key="repetitions"
-              onClick={e => {
-                e.preventDefault();
-                navigate('/startRepetitions');
-              }}
-              sx={{ my: 2, color: 'white', display: 'block' }}
-            >
-              {t('repetitions')}
-            </Button>
-            <Button
-              key="phrases"
-              onClick={e => {
-                e.preventDefault();
-                navigate('/phrases');
-              }}
-              sx={{ my: 2, color: 'white', display: 'block' }}
-            >
-              {t('phrases')}
-            </Button>
+            {menuItemsOptions.map(item => (
+              <AppBarButton
+                key={item.key}
+                onClick={e => {
+                  e.preventDefault();
+                  navigate(item.navigate);
+                  setSelectedMenuItemKey(item.key);
+                }}
+                label={item.label}
+                selected={item.key === selectedMenuItemKey}
+              />
+            ))}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
