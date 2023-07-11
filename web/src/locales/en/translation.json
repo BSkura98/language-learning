@@ -15,6 +15,7 @@
   },
   "pages": {
     "logIn": {
+      "appName": "Language learning",
       "pageTitle": "Log in",
       "pageDescription": "Log in to language learning app",
       "title": "Log in",
