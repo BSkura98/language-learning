@@ -3,8 +3,9 @@ import { useTranslation } from 'react-i18next';
 import { Alert, TextField, Typography } from '@mui/material';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
+import PublicIcon from '@mui/icons-material/Public';
 
-import { LoginForm, Wrapper } from './styled';
+import { LoginForm, Logo, Wrapper } from './styled';
 import { PasswordTextField } from '../../components/PasswordTextField';
 import { AccountContext } from '../../utils/users/Account';
 import { Button } from '../../components/Button/styled';
@@ -42,6 +43,10 @@ export const LogIn = memo((): JSX.Element => {
         <meta name="description" content={`${t('pageDescription')}`} />
       </Helmet>
       <Wrapper>
+        <Logo>
+          <PublicIcon fontSize="large" />
+          <Typography variant="h4">{t('appName')}</Typography>
+        </Logo>
         <LoginForm onSubmit={handleSubmit}>
           <Typography variant="h5" gutterBottom>
             {t('title')}
