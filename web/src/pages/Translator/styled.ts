@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { IconButton } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
 
 import { PageWrapper } from '../../components/PageWrapper/styled';
 
@@ -37,5 +38,11 @@ export const TranslateButtonContainer = styled.div`
 
   button {
     width: 10rem;
+  }
+`;
+
+export const Heading = styled(Typography)`
+  && {
+    font-family: cursive;
   }
 `;

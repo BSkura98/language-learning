@@ -3,14 +3,14 @@ import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet-async';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Grid from '@mui/material/Unstable_Grid2';
-import { Button, type SelectChangeEvent, TextField, Typography, Stack } from '@mui/material';
+import { Button, type SelectChangeEvent, TextField, Stack } from '@mui/material';
 import SyncAltIcon from '@mui/icons-material/SyncAlt';
 import TranslateIcon from '@mui/icons-material/Translate';
 import AddIcon from '@mui/icons-material/Add';
 import { toast } from 'react-toastify';
 
 import { Select } from '../../components/Select';
-import { ReverseLanguagesButton, TranslateButtonContainer, TranslatorPageWrapper } from './styled';
+import { Heading, ReverseLanguagesButton, TranslateButtonContainer, TranslatorPageWrapper } from './styled';
 import Api from '../../api/api';
 
 export const Translator = (): JSX.Element => {
@@ -89,9 +89,9 @@ export const Translator = (): JSX.Element => {
       </Helmet>
       <TranslatorPageWrapper>
         <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={2}>
-          <Typography variant="h6" gutterBottom>
+          <Heading variant="h6" gutterBottom>
             {t('translator')}
-          </Typography>
+          </Heading>
           <Button
             variant="text"
             startIcon={<AddIcon />}

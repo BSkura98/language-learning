@@ -17,6 +17,15 @@ export const PhrasesTable = ({ repetitions }: Props): JSX.Element => {
   const [selectedToDeletionRepetitionId, setSelectedToDeletionRepetitionId] = useState<string | null>(null);
   const [selectedToEditionRepetition, setSelectedToEditionRepetition] = useState<Repetition | null>(null);
 
+  const getProperCountryInISO3166 = (country: string): string => {
+    switch (country) {
+      case 'en':
+        return 'gb';
+      default:
+        return country;
+    }
+  };
+
   return (
     <>
       {selectedToEditionRepetition && (
@@ -33,7 +42,7 @@ export const PhrasesTable = ({ repetitions }: Props): JSX.Element => {
           repetitionId={selectedToDeletionRepetitionId!}
         />
       )}
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} style={{ backgroundColor: '#f6f6f6' }}>
         <Table sx={{ minWidth: 650 }} aria-label="phrases table">
           <TableHead>
             <TableRow>
@@ -52,15 +61,18 @@ export const PhrasesTable = ({ repetitions }: Props): JSX.Element => {
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  <b>{repetition.sourceLanguage}</b> {repetition.sourceLanguageText}
+                  <span className={`fi fi-${getProperCountryInISO3166(repetition.sourceLanguage)}`}></span>{' '}
+                  {repetition.sourceLanguageText}
                 </TableCell>
                 <TableCell>
-                  <b>{repetition.targetLanguage}</b> {repetition.targetLanguageText}
+                  <span className={`fi fi-${getProperCountryInISO3166(repetition.targetLanguage)}`}></span>{' '}
+                  {repetition.targetLanguageText}
                 </TableCell>
                 <TableCell align="right">{new Date(repetition.nextRepetitionDate).toDateString()}</TableCell>
                 <TableCell>
                   <IconButton
                     aria-label="edit"
+                    color="primary"
                     onClick={e => {
                       e.preventDefault();
                       setSelectedToEditionRepetition(repetition);
@@ -70,6 +82,7 @@ export const PhrasesTable = ({ repetitions }: Props): JSX.Element => {
                   </IconButton>
                   <IconButton
                     aria-label="delete"
+                    color="error"
                     onClick={e => {
                       e.preventDefault();
                       setSelectedToDeletionRepetitionId(repetition.id);
