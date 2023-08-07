@@ -21,20 +21,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - name: create-json
-        id: create-json-1
+      - name: create config.json file
+        id: create-json-2
         uses: jsdaniell/create-json@v1.2.2
         with:
-          name: "new-json-file.json"
+          name: "config.json"
           json: ${{ secrets.CONFIG_JSON }}
-          dir: "api/config/"
-      # - name: create config.json file
-      #   id: create-json-2
-      #   uses: jsdaniell/create-json@v1.2.2
-      #   with:
-      #     name: "config.json"
-      #     json: ${{ secrets.CONFIG_JSON }}
-      #     dir: "api/config/"
+          dir: 'api/config/'
       - name: serverless deploy
         uses: serverless/github-action@v3.2
         with:
