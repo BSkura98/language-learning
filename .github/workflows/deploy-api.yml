@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      - create-deploy-api-workflow # just for a test
     paths:
       - api
 
