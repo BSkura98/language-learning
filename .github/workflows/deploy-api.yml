@@ -26,7 +26,7 @@ jobs:
         uses: jsdaniell/create-json@v1.2.2
         with:
           name: "new-json-file.json"
-          json: '{"name":"jsdaniell", "password":"mypass"}'
+          json: ${{ secrets.CONFIG_JSON }}
       - name: create config.json file
         id: create-json-2
         uses: jsdaniell/create-json@v1.2.2
