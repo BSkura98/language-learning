@@ -27,7 +27,7 @@ jobs:
         with:
           name: "new-json-file.json"
           json: ${{ secrets.CONFIG_JSON }}
-          dir: 'api/'
+          dir: 'api/config/'
       - name: create config.json file
         id: create-json-2
         uses: jsdaniell/create-json@v1.2.2
