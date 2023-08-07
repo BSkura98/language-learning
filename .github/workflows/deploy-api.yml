@@ -27,7 +27,7 @@ jobs:
         with:
           name: "config.json"
           json: ${{ secrets.CONFIG_JSON }}
-          dir: "config/"
+          dir: "api/config/"
       - name: serverless deploy
         uses: serverless/github-action@v3.2
         with:
