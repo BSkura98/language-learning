@@ -6,7 +6,7 @@ node_modules
 .serverless
 
 # config folder
-config
+config/*
 
 # build
 .build
