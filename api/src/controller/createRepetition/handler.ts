@@ -10,7 +10,6 @@ export const createRepetition = async (event: APIGatewayProxyEvent): Promise<API
   try {
     const requestParameters: CreateRepetitionRequest = getRequest(event);
     const result = await createRepetitionService(requestParameters);
-    console.log('test');
 
     return getResponse(201, result);
   } catch (error) {
