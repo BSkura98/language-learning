@@ -52,3 +52,6 @@ Optional body parameters:
 
 ### DELETE /repetitions/{id}
 Remove a repetition with given `id`
+
+### PATCH /repetitions/{id}/result _(doesn't exist yet)_
+Handle repetition result - calculate next repetition date and number of successul repetitions in row based on repetition result
