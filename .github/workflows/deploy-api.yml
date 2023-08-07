@@ -22,6 +22,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: cd api
+      - run: pwd
       - name: serverless deploy
         uses: serverless/github-action@v3.2
         with:
