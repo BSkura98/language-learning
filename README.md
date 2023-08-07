@@ -14,6 +14,7 @@ This is an application which allows users for translating texts and learning wor
 * TypeORM
 * Terraform
 * MySQL
+* GitHub Actions
 
 ## Features
 * Logging in
