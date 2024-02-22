@@ -29,6 +29,3 @@ This is an application which allows users for translating texts and learning wor
 
 ## Endpoints
 You can find endpoints descriptions [here](/api/README.md)
-
-## Status
-Project is _in progress_
