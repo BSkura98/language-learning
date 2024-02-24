@@ -4,6 +4,7 @@ import { endOfDay } from 'date-fns';
 import { getRepetitionRepository } from '../../repository/repetition.repository';
 import { GetRepetitionsRequest } from './request';
 import { getSort } from '../../utils/getSort';
+import { getPagination } from '../../utils/getPagination';
 
 export const getRepetitionsService = async (
   requestParameters: GetRepetitionsRequest
@@ -11,6 +12,7 @@ export const getRepetitionsService = async (
   const repetitionRepository = await getRepetitionRepository();
   const { sortBy, sortType } = getSort('repetition', requestParameters.sort);
   const { startDate, endDate, sourceLanguage, targetLanguage } = requestParameters;
+  const { skip, take } = getPagination(requestParameters);
 
   const repetitions = await repetitionRepository
     .createQueryBuilder('repetition')
@@ -28,6 +30,8 @@ export const getRepetitionsService = async (
       targetLanguage
     })
     .orderBy(sortBy, sortType)
+    .skip(skip)
+    .take(take)
     .getMany();
 
   return repetitions;
