@@ -36,7 +36,7 @@ export const getRequest = (event: APIGatewayProxyEvent, options?: GetRequestOpti
   }
 
   let pagination;
-  if (queryParameters && (queryParameters['take'] || queryParameters['skip'])) {
+  if (queryParameters && queryParameters['take']) {
     pagination = {
       skip: queryParameters['skip'],
       take: queryParameters['take']
