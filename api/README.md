@@ -37,6 +37,8 @@ Optional query parameters:
 * `targetLanguage` (string) - list repetitions whose target texts are in a given language
 * `sortBy` (string) - sort by a given field name
 * `sortType` (`ASC`|`DESC`) - sort ascending (`ASC`) or descending (`DESC`)
+* `skip` (number) - number of repetitions which should be skipped
+* `take` (number) - number of repetitions which should be returned
 
 ### GET /repetitions/{id}
 Get a repetition with given `id`
