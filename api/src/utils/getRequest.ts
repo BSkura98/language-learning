@@ -34,9 +34,20 @@ export const getRequest = (event: APIGatewayProxyEvent, options?: GetRequestOpti
     delete queryParameters['sortBy'];
     delete queryParameters['sortType'];
   }
+
+  let pagination;
+  if (queryParameters && queryParameters['take']) {
+    pagination = {
+      skip: queryParameters['skip'],
+      take: queryParameters['take']
+    };
+    delete queryParameters['skip'];
+    delete queryParameters['take'];
+  }
   return {
     userId: getUserId(event),
     sort,
+    pagination,
     ...pathParameters,
     ...queryParameters,
     ...JSON.parse(event.body)
