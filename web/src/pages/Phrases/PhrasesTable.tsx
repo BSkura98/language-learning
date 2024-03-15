@@ -1,6 +1,16 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import {
+  IconButton,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TablePagination,
+  TableRow,
+} from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
@@ -16,6 +26,8 @@ export const PhrasesTable = ({ repetitions }: Props): JSX.Element => {
   const { t } = useTranslation('translation', { keyPrefix: 'pages.phrases' });
   const [selectedToDeletionRepetitionId, setSelectedToDeletionRepetitionId] = useState<string | null>(null);
   const [selectedToEditionRepetition, setSelectedToEditionRepetition] = useState<Repetition | null>(null);
+  const [rowsPerPage, setRowsPerPage] = useState<number>(10);
+  const [page, setPage] = useState<number>(0);
 
   const getProperCountryInISO3166 = (country: string): string => {
     switch (country) {
@@ -24,6 +36,15 @@ export const PhrasesTable = ({ repetitions }: Props): JSX.Element => {
       default:
         return country;
     }
+  };
+
+  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  const handleChangePage = (event: unknown, newPage: number): void => {
+    setPage(newPage);
   };
 
   return (
@@ -96,6 +117,15 @@ export const PhrasesTable = ({ repetitions }: Props): JSX.Element => {
           </TableBody>
         </Table>
       </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={repetitions?.length ?? 0}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
     </>
   );
 };
