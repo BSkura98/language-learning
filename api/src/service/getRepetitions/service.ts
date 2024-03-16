@@ -1,20 +1,20 @@
-import { APIGatewayProxyResult } from 'aws-lambda';
 import { endOfDay } from 'date-fns';
 
 import { getRepetitionRepository } from '../../repository/repetition.repository';
 import { GetRepetitionsRequest } from './request';
 import { getSort } from '../../utils/getSort';
 import { getPagination } from '../../utils/getPagination';
+import { GetRepetitionsResponse } from './response';
 
 export const getRepetitionsService = async (
   requestParameters: GetRepetitionsRequest
-): Promise<APIGatewayProxyResult> => {
+): Promise<GetRepetitionsResponse> => {
   const repetitionRepository = await getRepetitionRepository();
   const { sortBy, sortType } = getSort('repetition', requestParameters.sort);
   const { startDate, endDate, sourceLanguage, targetLanguage } = requestParameters;
   const { skip, take } = getPagination(requestParameters);
 
-  const repetitions = await repetitionRepository
+  const queryBuilder = repetitionRepository
     .createQueryBuilder('repetition')
     .where('repetition.userId = :userId', { userId: requestParameters.userId })
     .andWhere(startDate ? 'repetition.nextRepetitionDate >= :startDate' : 'TRUE', {
@@ -28,11 +28,15 @@ export const getRepetitionsService = async (
     })
     .andWhere(targetLanguage ? 'repetition.targetLanguage = :targetLanguage' : 'TRUE', {
       targetLanguage
-    })
-    .orderBy(sortBy, sortType)
-    .skip(skip)
-    .take(take)
-    .getMany();
+    });
 
-  return repetitions;
+  const repetitions = await queryBuilder.orderBy(sortBy, sortType).skip(skip).take(take).getMany();
+  const total = await queryBuilder.getCount();
+
+  return {
+    data: repetitions,
+    skip,
+    take,
+    total
+  };
 };

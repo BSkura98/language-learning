@@ -40,6 +40,12 @@ Optional query parameters:
 * `skip` (number) - number of repetitions which should be skipped
 * `take` (number) - number of repetitions which should be returned
 
+Response:
+* `data` (Repetition[]) - list of repetitions
+* `skip` - number of repetitions skipped
+* `take` - number of repetitions returned
+* `total` - number of all existing repetitions (for given user)
+
 ### GET /repetitions/{id}
 Get a repetition with given `id`
 
