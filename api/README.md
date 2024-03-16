@@ -44,7 +44,7 @@ Response:
 * `data` (Repetition[]) - list of repetitions
 * `skip` - number of repetitions skipped
 * `take` - number of repetitions returned
-* `total` - number of all existing repetitions (for given)
+* `total` - number of all existing repetitions (for given users)
 
 ### GET /repetitions/{id}
 Get a repetition with given `id`
